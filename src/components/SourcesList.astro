@@ -1,0 +1,74 @@
+---
+import type { Lang } from '../content/ui';
+import { pickSources, sourceLabel, type SourceId } from '../content/sources';
+
+interface Props {
+  lang: Lang;
+  ids: readonly SourceId[];
+  heading?: string;
+  intro?: string;
+}
+
+const { lang, ids, heading, intro } = Astro.props;
+const list = pickSources([...ids]);
+const title =
+  heading ?? (lang === 'fr' ? 'Sources et références' : 'Sources and references');
+---
+
+<aside class="sources" aria-label={title}>
+  <h2 class="font-display sources-h">{title}</h2>
+  {intro && <p class="intro">{intro}</p>}
+  <ol>
+    {
+      list.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener noreferrer">
+            {sourceLabel(s, lang)}
+          </a>
+          {s.note && <span class="note"> — {s.note[lang]}</span>}
+        </li>
+      ))
+    }
+  </ol>
+</aside>
+
+<style>
+  .sources {
+    margin: 3rem 0 0;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgba(245, 245, 242, 0.14);
+    max-width: 46rem;
+  }
+  .sources-h {
+    font-size: 1.15rem;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .intro {
+    color: var(--color-mute);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin: 0 0 1rem;
+  }
+  ol {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+  li {
+    line-height: 1.45;
+    font-size: 0.95rem;
+  }
+  a {
+    color: var(--color-fg);
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  a:hover {
+    color: var(--color-heat);
+  }
+  .note {
+    color: var(--color-mute);
+  }
+</style>

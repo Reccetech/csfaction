@@ -1,0 +1,166 @@
+---
+import type { Lang } from '../content/ui';
+import { formatCadCompact, formatCadFull, legalSpendSeries, legalSpendTotal } from '../site.config';
+
+interface Props {
+  lang: Lang;
+  caption: string;
+  totalLabel: string;
+  fullBleed?: boolean;
+}
+
+const { lang, caption, totalLabel, fullBleed = false } = Astro.props;
+const max = Math.max(...legalSpendSeries.map((d) => d.amount));
+---
+
+<div class:list={['bars-wrap', { 'bars-bleed': fullBleed }]} data-legal-bars>
+  <div class="bars-chrome">
+    <p class="caption">{caption}</p>
+  </div>
+  <div class="bars" role="img" aria-label={caption}>
+    {
+      legalSpendSeries.map((d) => {
+        const height = Math.max(10, Math.round((d.amount / max) * 100));
+        return (
+          <div class="col">
+            <div class="value">{formatCadCompact(d.amount, lang)}</div>
+            <div class="track">
+              <div class="legal-bar fill" style={`--bar-h:${height}%`} data-bar />
+            </div>
+            <div class="year">{d.year}</div>
+          </div>
+        );
+      })
+    }
+  </div>
+  <div class="bars-chrome">
+    <p class="total">
+      <span>{totalLabel}</span>
+      <strong class="heat">{formatCadFull(legalSpendTotal, lang)}</strong>
+    </p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('[data-legal-bars]').forEach((root) => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const bars = root.querySelectorAll('[data-bar]');
+    if (reduce) {
+      bars.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            bars.forEach((el, i) => {
+              window.setTimeout(() => el.classList.add('is-in'), i * 140);
+            });
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(root);
+  });
+</script>
+
+<style>
+  .bars-wrap {
+    width: 100%;
+  }
+
+  .bars-bleed {
+    width: 100%;
+  }
+
+  .bars-chrome {
+    width: min(1120px, calc(100% - 2rem));
+    margin-inline: auto;
+  }
+
+  .caption {
+    color: var(--color-mute);
+    margin: 0 0 1.5rem;
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    line-height: 1.4;
+  }
+
+  .bars {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(0.35rem, 1.8vw, 1.75rem);
+    align-items: end;
+    width: 100%;
+    padding-inline: clamp(0.75rem, 3vw, 2.5rem);
+    min-height: clamp(260px, 48vh, 520px);
+  }
+
+  .bars-bleed .bars {
+    padding-inline: clamp(1rem, 4vw, 3rem);
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.4rem, 1.2vw, 0.75rem);
+    min-width: 0;
+    height: 100%;
+  }
+
+  .value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(0.95rem, 3.2vw, 2rem);
+    letter-spacing: -0.03em;
+    color: var(--color-snow);
+    text-align: center;
+    line-height: 1;
+  }
+
+  .track {
+    width: 100%;
+    flex: 1;
+    min-height: clamp(180px, 38vh, 420px);
+    display: flex;
+    align-items: flex-end;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .fill {
+    width: 100%;
+    height: var(--bar-h);
+    background: linear-gradient(180deg, var(--color-ember) 0%, var(--color-heat) 72%);
+    box-shadow: 0 0 40px rgba(253, 62, 18, 0.18);
+  }
+
+  .year {
+    color: var(--color-mute);
+    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .total {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    align-items: baseline;
+    margin: 1.5rem 0 0;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+  }
+
+  .total strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    letter-spacing: -0.03em;
+  }
+
+  @media (max-width: 640px) {
+    .year {
+      font-size: 0.65rem;
+    }
+  }
+</style>

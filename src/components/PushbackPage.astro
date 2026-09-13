@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { pushback } from '../content/pages';
+import type { Lang } from '../content/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = pushback[lang];
+---
+
+<Layout lang={lang} title={t.title} description={t.description} path={path}>
+  <section class="section pushback-page">
+    <div class="container-page">
+      <header class="page-head">
+        <p class="eyebrow heat">{lang === 'fr' ? 'Pression communautaire' : 'Community Pressure'}</p>
+        <h1 class="font-display page-title">{t.h1}</h1>
+        <p class="lead">{t.lead}</p>
+      </header>
+
+      <h2 class="font-display list-title">{t.listTitle}</h2>
+      <ul class="reading-list">
+        {
+          t.items.map((item) => (
+            <li>
+              <a
+                class="reading-item"
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="reading-title font-display">{item.title}</span>
+                <span class="reading-blurb">{item.blurb}</span>
+                <span class="reading-go" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="note">{t.electionNote}</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pushback-page {
+    padding-bottom: clamp(4rem, 10vw, 6rem);
+  }
+  .page-head {
+    margin-bottom: 2.5rem;
+    max-width: 42rem;
+  }
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .page-title {
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 1rem;
+    line-height: 1.05;
+  }
+  .lead {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.18rem);
+    line-height: 1.6;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .list-title {
+    margin: 0 0 1.25rem;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    letter-spacing: -0.03em;
+  }
+  .reading-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.85rem;
+  }
+  .reading-item {
+    position: relative;
+    display: grid;
+    gap: 0.55rem;
+    padding: 1.25rem 1.15rem;
+    padding-right: 2.75rem;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-panel);
+    border: 1px solid rgba(245, 245, 242, 0.1);
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      background 0.2s ease;
+  }
+  .reading-item:hover {
+    border-color: rgba(253, 62, 18, 0.55);
+    background: rgba(253, 62, 18, 0.06);
+    transform: translateY(-1px);
+  }
+  .reading-title {
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-heat);
+  }
+  .reading-blurb {
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: rgba(245, 245, 242, 0.86);
+    max-width: 48rem;
+  }
+  .reading-go {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.15rem;
+    color: var(--color-heat);
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+  @media (min-width: 800px) {
+    .reading-item {
+      padding: 1.4rem 1.5rem;
+      padding-right: 3rem;
+    }
+    .reading-go {
+      top: 1.4rem;
+      right: 1.4rem;
+    }
+  }
+  .note {
+    margin: 2.25rem 0 0;
+    max-width: 40rem;
+    color: var(--color-mute);
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+</style>

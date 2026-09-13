@@ -1,0 +1,566 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CaseSpendLineChart from '../components/CaseSpendLineChart.astro';
+import SourcesList from '../components/SourcesList.astro';
+import { legal } from '../content/pages';
+import { legalCaseDeep } from '../content/legal-case';
+import { pageSourceIds, sources } from '../content/sources';
+import type { Lang } from '../content/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = legal[lang];
+const caseDeep = legalCaseDeep[lang];
+const sofiHref = sources.csfFinancialReports.href;
+const cbcHref = sources.cbc2016.href;
+
+const pageRefs = (() => {
+  const seen = new Set<string>();
+  const out: { label: string; href: string }[] = [];
+  const push = (ref: { label: string; href: string }) => {
+    if (seen.has(ref.href)) return;
+    seen.add(ref.href);
+    out.push(ref);
+  };
+  for (const wave of caseDeep.waves) {
+    for (const ref of wave.refs) push(ref);
+  }
+  for (const ref of caseDeep.biggerPicture.refs) push(ref);
+  return out;
+})();
+---
+
+<Layout lang={lang} title={t.title} description={t.description} path={path}>
+  <article class="legal-page">
+    <header class="legal-hero section">
+      <div class="container-page">
+        <div class="reading-lead">
+          <p class="eyebrow heat">{lang === 'fr' ? 'Dossier juridique' : 'Legal case file'}</p>
+          <h1 class="font-display page-title">{t.h1}</h1>
+          <p class="lead">{t.lead}</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="legal-band section" aria-labelledby="fees-heading">
+      <div class="container-page">
+        <h2 id="fees-heading" class="font-display">{t.feesTitle}</h2>
+        <CaseSpendLineChart lang={lang} title={t.feesTitle} />
+        <p class="chart-fineprint reading">
+          {
+            lang === 'fr' ? (
+              <>
+                Montants exacts tirés des{' '}
+                <a href={sofiHref} target="_blank" rel="noopener noreferrer">SOFI publics du CSF</a>
+                . Le site du CSF publie des SOFI à partir de 2019–20 seulement. Les états financiers
+                vérifiés de 2010 à 2019 sont en ligne, mais ils ne ventilent pas les paiements au
+                cabinet.{' '}
+                <a href={cbcHref} target="_blank" rel="noopener noreferrer">CBC</a> rapportait déjà
+                près de 17&nbsp;M$ dépensés sur le dossier au verdict de 2016.
+              </>
+            ) : (
+              <>
+                Exact amounts from CSF’s{' '}
+                <a href={sofiHref} target="_blank" rel="noopener noreferrer">public SOFIs</a>
+                . CSF’s financial-reports page only publishes SOFIs from 2019–20 onward. Audited
+                financial statements for 2010–2019 are online, but they do not break out payments to
+                the law firm.{' '}
+                <a href={cbcHref} target="_blank" rel="noopener noreferrer">CBC</a> reported nearly
+                $17M already spent on the case by the 2016 trial verdict.
+              </>
+            )
+          }
+        </p>
+      </div>
+    </section>
+
+    <section class="legal-band section panel" aria-labelledby="overall-heading">
+      <div class="container-page">
+        <h2 id="overall-heading" class="font-display">{t.overallTitle}</h2>
+        <div class="overall">
+          {
+            t.overall.map((row) => (
+              <div class="overall-row">
+                <div class="overall-meta">
+                  <span class="overall-label">{row.label}</span>
+                  <a class="src" href={row.href} target="_blank" rel="noopener noreferrer">
+                    {row.sourceLabel}
+                  </a>
+                </div>
+                <strong class="heat overall-value">{row.value}</strong>
+              </div>
+            ))
+          }
+        </div>
+        <p class="estimate-note reading">{t.estimateNote}</p>
+      </div>
+    </section>
+
+    <section class="legal-band section" aria-labelledby="fight-heading">
+      <div class="container-page">
+        <div class="reading">
+          <h2 id="fight-heading" class="font-display">{t.fightTitle}</h2>
+          <p>{t.fightBody}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="legal-band section panel" aria-labelledby="wins-heading">
+      <div class="container-page">
+        <div class="reading">
+          <h2 id="wins-heading" class="font-display">{caseDeep.winsTitle}</h2>
+          <p class="wins-lead">{caseDeep.winsLead}</p>
+        </div>
+        {
+          caseDeep.waves.map((wave) => (
+            <section class={`wave-section wave-${wave.id}`} aria-labelledby={`${wave.id}-title`}>
+              <div class="wave-head reading">
+                <h3 id={`${wave.id}-title`} class="font-display wave-title">
+                  {wave.title}
+                </h3>
+                <p class="wave-sub">{wave.subtitle}</p>
+              </div>
+              <dl class="wave-timeline">
+                {wave.timeline.map((item) => (
+                  <div class="timeline-row">
+                    <dt>{item.label}</dt>
+                    <dd>{item.date}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div class="wave-body">
+                <section class="wave-panel">
+                  <h4 class="font-display panel-h">{wave.summaryTitle}</h4>
+                  {wave.summary.map((p) => (
+                    <p>{p}</p>
+                  ))}
+                </section>
+
+                <div class="outcome-grid">
+                  <section class="wave-panel outcome achieved">
+                    <h4 class="font-display panel-h">{wave.achievedTitle}</h4>
+                    <ul>
+                      {wave.achieved.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </section>
+                  <section class="wave-panel outcome not-achieved">
+                    <h4 class="font-display panel-h">{wave.notAchievedTitle}</h4>
+                    <ul>
+                      {wave.notAchieved.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </section>
+                </div>
+
+                {
+                  wave.appeal && (
+                    <section class="appeal-block" aria-labelledby={`${wave.id}-appeal-title`}>
+                      <div class="wave-head appeal-head reading">
+                        <h4 id={`${wave.id}-appeal-title`} class="font-display wave-title appeal-title">
+                          {wave.appeal.title}
+                        </h4>
+                      </div>
+                      <dl class="wave-timeline">
+                        {wave.appeal.timeline.map((item) => (
+                          <div class="timeline-row">
+                            <dt>{item.label}</dt>
+                            <dd>{item.date}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                      <div class="wave-body">
+                        <section class="wave-panel partner-highlight" aria-label={wave.appeal.partnersTitle}>
+                          {wave.appeal.partners.map((p) => (
+                            <p>{p}</p>
+                          ))}
+                        </section>
+                        <section class="wave-panel">
+                          <h5 class="font-display panel-h">{wave.appeal.summaryTitle}</h5>
+                          {wave.appeal.summary.map((p) => (
+                            <p>{p}</p>
+                          ))}
+                        </section>
+                        <section class="wave-panel outcome goals">
+                          <h5 class="font-display panel-h">{wave.appeal.goalsTitle}</h5>
+                          <ul>
+                            {wave.appeal.goals.map((item) => (
+                              <li>{item}</li>
+                            ))}
+                          </ul>
+                        </section>
+                        <section class="wave-panel outcome chances">
+                          <h5 class="font-display panel-h">{wave.appeal.chancesTitle}</h5>
+                          <ul>
+                            {wave.appeal.chances.map((item) => (
+                              <li>{item}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      </div>
+                    </section>
+                  )
+                }
+
+              </div>
+            </section>
+          ))
+        }
+
+        <section class="bigger-picture wave-section" aria-labelledby="bigger-picture-title">
+          <div class="wave-head reading">
+            <h3 id="bigger-picture-title" class="font-display wave-title">
+              {caseDeep.biggerPicture.title}
+            </h3>
+          </div>
+          <div class="wave-panel">
+            {caseDeep.biggerPicture.paragraphs.map((p) => (
+              <p>{p}</p>
+            ))}
+          </div>
+        </section>
+
+        <aside class="wave-refs page-refs" aria-labelledby="case-refs-heading">
+          <p id="case-refs-heading" class="refs-label">{lang === 'fr' ? 'Références' : 'References'}</p>
+          <ul>
+            {
+              pageRefs.map((ref) => (
+                <li>
+                  <a href={ref.href} target="_blank" rel="noopener noreferrer">
+                    {ref.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="legal-band section panel close-band">
+      <div class="container-page">
+        <SourcesList lang={lang} ids={pageSourceIds.legal} intro={t.sourcesIntro} />
+      </div>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .legal-page {
+    overflow-x: clip;
+  }
+  .legal-hero {
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+    border-bottom: 1px solid rgba(245, 245, 242, 0.08);
+  }
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .page-title {
+    font-size: clamp(2rem, 7vw, 3.75rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 1rem;
+    line-height: 1.05;
+    max-width: 18ch;
+  }
+  .lead {
+    max-width: 40rem;
+    font-size: clamp(1.05rem, 2.4vw, 1.2rem);
+    line-height: 1.6;
+    margin: 0;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .legal-band.section {
+    padding-block: clamp(2.75rem, 7vw, 5rem);
+  }
+  .panel {
+    background: var(--color-panel);
+  }
+  h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.45rem, 3.4vw, 2rem);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    max-width: 28ch;
+  }
+  h3 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .body,
+  .prose p,
+  .wins-lead,
+  .wave-panel p {
+    max-width: 46rem;
+    line-height: 1.65;
+    font-size: clamp(1rem, 2.2vw, 1.08rem);
+    color: rgba(245, 245, 242, 0.9);
+  }
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  a:hover {
+    color: var(--color-heat);
+  }
+  .wins-lead {
+    margin: 0 0 1.75rem;
+    font-weight: 500;
+  }
+  .chart-fineprint {
+    margin: 0.85rem 0 0;
+    max-width: 46rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--color-mute);
+  }
+  .chart-fineprint a {
+    color: inherit;
+  }
+  .wave-section {
+    margin: 0 0 2.5rem;
+    padding: 1.35rem 0 0;
+    border-top: 1px solid rgba(245, 245, 242, 0.12);
+  }
+  .wave-section:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .wave-head {
+    margin-bottom: 1rem;
+  }
+  .wave-title {
+    margin: 0 0 0.45rem;
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+    max-width: none;
+    letter-spacing: -0.03em;
+  }
+  .wave-sub {
+    margin: 0;
+    max-width: 42rem;
+    color: rgba(245, 245, 242, 0.82);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .wave-timeline {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0 0 1.35rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(245, 245, 242, 0.1);
+  }
+  .timeline-row {
+    display: grid;
+    gap: 0.15rem;
+  }
+  @media (min-width: 640px) {
+    .timeline-row {
+      grid-template-columns: minmax(10rem, 14rem) 1fr;
+      gap: 1rem;
+      align-items: baseline;
+    }
+  }
+  .timeline-row dt {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .timeline-row dd {
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.4;
+  }
+  .overall {
+    display: grid;
+    gap: 0;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(245, 245, 242, 0.12);
+  }
+  .overall-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(245, 245, 242, 0.12);
+  }
+  @media (min-width: 720px) {
+    .overall-row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1.25rem;
+      align-items: baseline;
+      padding: 1.2rem 0;
+    }
+  }
+  .overall-meta {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 0;
+  }
+  .overall-label {
+    line-height: 1.4;
+  }
+  .overall-meta .src {
+    font-size: 0.85rem;
+    color: var(--color-mute);
+    width: fit-content;
+  }
+  .overall-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 4vw, 1.85rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .estimate-note {
+    color: var(--color-mute);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 1.25rem 0 0;
+    max-width: 46rem;
+  }
+  .wave-body {
+    display: grid;
+    gap: 1rem;
+  }
+  .wave-panel {
+    padding: 1.25rem 1.1rem;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(245, 245, 242, 0.08);
+  }
+  @media (min-width: 900px) {
+    .wave-panel {
+      padding: 1.4rem 1.35rem;
+    }
+  }
+  .panel-h {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  .wave-panel p {
+    margin: 0 0 0.85rem;
+  }
+  .wave-panel p:last-child {
+    margin-bottom: 0;
+  }
+  .outcome-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 800px) {
+    .outcome-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+  }
+  .outcome.achieved {
+    border-left: 3px solid #3d9a6a;
+  }
+  .outcome.not-achieved {
+    border-left: 3px solid var(--color-heat);
+  }
+  .appeal-block {
+    margin-top: 0.35rem;
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(245, 245, 242, 0.14);
+  }
+  .appeal-head {
+    margin-bottom: 0.85rem;
+  }
+  .appeal-title {
+    font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+  }
+  .partner-highlight {
+    background: linear-gradient(135deg, rgba(196, 163, 90, 0.22), rgba(196, 163, 90, 0.08));
+    border: 1px solid rgba(196, 163, 90, 0.45);
+    border-left: 4px solid #c4a35a;
+    box-shadow: inset 0 1px 0 rgba(245, 245, 242, 0.06);
+  }
+  .partner-highlight p {
+    color: rgba(245, 245, 242, 0.95);
+  }
+  .outcome.goals {
+    border-left: 3px solid rgba(245, 245, 242, 0.35);
+  }
+  .outcome.chances {
+    border-left: 3px solid #c4a35a;
+  }
+  .outcome ul {
+    margin: 0;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.55rem;
+    line-height: 1.5;
+    font-size: 0.98rem;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .wave-refs {
+    margin-top: 0.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(245, 245, 242, 0.1);
+  }
+  .page-refs {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+  }
+  .refs-label {
+    margin: 0 0 0.55rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-mute);
+  }
+  .wave-refs ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .wave-refs a {
+    font-size: 0.9rem;
+    color: var(--color-mute);
+  }
+  .wave-refs a:hover {
+    color: var(--color-heat);
+  }
+  .close {
+    font-weight: 600;
+    font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+    line-height: 1.5;
+    max-width: 40rem;
+  }
+  .close-band :global(.sources) {
+    max-width: none;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+import type { Lang } from '../content/ui';
+import { routes, twinPath, ui } from '../content/ui';
+import { siteConfig } from '../site.config';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = ui[lang];
+const r = routes[lang];
+const twin = twinPath(lang, path);
+const links = [
+  { href: r.home, label: t.nav.home },
+  { href: r.enrolment, label: t.nav.enrolment },
+  { href: r.legal, label: t.nav.legal },
+  { href: r.pushback, label: t.nav.pushback },
+];
+---
+
+<header class="site-header">
+  <div class="container-page header-inner">
+    <a class="brand font-display" href={r.home}>{t.brand}</a>
+    <nav class="nav" aria-label={lang === 'fr' ? 'Principal' : 'Primary'}>
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={['nav-link', { active: path === link.href || (link.href !== r.home && path.startsWith(link.href)) }]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="header-actions">
+      <a class="lang" href={twin} hreflang={lang === 'fr' ? 'en' : 'fr'}>{t.langSwitch}</a>
+      <a class="btn-primary header-cta" href={siteConfig.changeOrgUrl}>{t.nav.sign}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(0, 0, 0, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(245, 245, 242, 0.08);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4rem;
+  }
+  .brand {
+    font-weight: 700;
+    font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav {
+    display: none;
+    gap: 1.1rem;
+    margin-left: 1rem;
+    flex: 1;
+  }
+  .nav-link {
+    text-decoration: none;
+    color: var(--color-mute);
+    font-size: 0.92rem;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-snow);
+  }
+  .header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .lang {
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .header-cta {
+    display: none;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.85rem;
+  }
+  @media (min-width: 820px) {
+    .nav {
+      display: flex;
+    }
+    .header-cta {
+      display: inline-flex;
+    }
+  }
+</style>

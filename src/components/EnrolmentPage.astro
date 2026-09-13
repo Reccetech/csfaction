@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EnrolmentChart from '../components/EnrolmentChart.astro';
+import SourcesList from '../components/SourcesList.astro';
+import { enrolment } from '../content/pages';
+import { pageSourceIds } from '../content/sources';
+import type { Lang } from '../content/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = enrolment[lang];
+---
+
+<Layout lang={lang} title={t.title} description={t.description} path={path}>
+  <section class="section">
+    <div class="container-page page-stack">
+      <header class="reading-lead">
+        <h1 class="font-display page-title">{t.h1}</h1>
+        <p class="lead">{t.lead}</p>
+      </header>
+
+      <EnrolmentChart title={t.chartTitle} />
+
+      <div class="reading">
+        <h2 class="font-display">{t.schoolsTitle}</h2>
+        <p>{t.schoolsIntro}</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <tbody>
+            {
+              t.schools.map((s) => (
+                <tr>
+                  <td>{s.name}</td>
+                  <td>
+                    {s.from} → {s.to}
+                  </td>
+                  <td class="heat">{s.delta}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reading">
+        <h2 class="font-display">{t.closeTitle}</h2>
+        <p>{t.closeBody}</p>
+        <SourcesList lang={lang} ids={pageSourceIds.enrolment} intro={t.sourcesIntro} />
+      </div>
+    </div>
+  </section>
+</Layout>
+<style>
+  .page-stack {
+    display: grid;
+    gap: clamp(1.5rem, 3.5vw, 2.25rem);
+  }
+  .page-title {
+    font-size: clamp(2.2rem, 6.5vw, 3.75rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 1rem;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .lead {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.18rem);
+    line-height: 1.65;
+    color: rgba(245, 245, 242, 0.92);
+  }
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.4rem, 3vw, 1.85rem);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .reading p {
+    margin: 0 0 1rem;
+    font-size: clamp(1rem, 2.2vw, 1.08rem);
+    line-height: 1.65;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .reading p:last-child {
+    margin-bottom: 0;
+  }
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid rgba(245, 245, 242, 0.1);
+  }
+  table {
+    width: 100%;
+    min-width: 28rem;
+    border-collapse: collapse;
+  }
+  td {
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(245, 245, 242, 0.08);
+    vertical-align: top;
+  }
+  @media (max-width: 520px) {
+    td {
+      padding: 0.75rem 0.7rem;
+      font-size: 0.95rem;
+    }
+  }
+</style>

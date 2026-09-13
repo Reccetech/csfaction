@@ -1,0 +1,30 @@
+---
+import type { Lang } from '../content/ui';
+import { ui } from '../content/ui';
+import { siteConfig } from '../site.config';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const label = ui[lang].stickyCta;
+---
+
+<a class="sticky-cta btn-primary" href={siteConfig.changeOrgUrl}>{label}</a>
+
+<style>
+  .sticky-cta {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+  @media (min-width: 820px) {
+    .sticky-cta {
+      display: none;
+    }
+  }
+</style>

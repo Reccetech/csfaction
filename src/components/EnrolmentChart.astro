@@ -1,0 +1,62 @@
+---
+import { enrolmentSeries } from '../site.config';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const width = 640;
+const height = 260;
+const pad = 36;
+const counts = enrolmentSeries.map((d) => d.count);
+const min = Math.min(...counts) - 80;
+const max = Math.max(...counts) + 40;
+const x = (i: number) => pad + (i * (width - pad * 2)) / (enrolmentSeries.length - 1);
+const y = (v: number) => height - pad - ((v - min) / (max - min)) * (height - pad * 2);
+const points = enrolmentSeries.map((d, i) => `${x(i)},${y(d.count)}`).join(' ');
+---
+
+<figure class="chart">
+  <figcaption>{title}</figcaption>
+  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={title}>
+    <polyline
+      fill="none"
+      stroke="rgba(245,245,242,0.15)"
+      stroke-width="1"
+      points={`${pad},${height - pad} ${width - pad},${height - pad}`}></polyline>
+    <polyline fill="none" stroke="#FD3E12" stroke-width="3" points={points}></polyline>
+    {
+      enrolmentSeries.map((d, i) => (
+        <g>
+          <circle cx={x(i)} cy={y(d.count)} r="5" fill="#FD3E12"></circle>
+          <text x={x(i)} y={height - 12} text-anchor="middle" fill="#8A8A86" font-size="12">
+            {d.year}
+          </text>
+          <text x={x(i)} y={y(d.count) - 12} text-anchor="middle" fill="#F5F5F2" font-size="13" font-weight="700">
+            {d.count.toLocaleString('en-CA')}
+          </text>
+        </g>
+      ))
+    }
+  </svg>
+</figure>
+
+<style>
+  .chart {
+    margin: 0;
+    padding: 1.25rem;
+    background: var(--color-panel);
+    border: 1px solid rgba(245, 245, 242, 0.08);
+  }
+  figcaption {
+    color: var(--color-mute);
+    margin-bottom: 0.75rem;
+    font-size: 0.92rem;
+  }
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
