@@ -15,11 +15,15 @@ const max = Math.max(...counts) + 40;
 const x = (i: number) => pad + (i * (width - pad * 2)) / (enrolmentSeries.length - 1);
 const y = (v: number) => height - pad - ((v - min) / (max - min)) * (height - pad * 2);
 const points = enrolmentSeries.map((d, i) => `${x(i)},${y(d.count)}`).join(' ');
+const accessibleSummary = [
+  title,
+  ...enrolmentSeries.map((d) => `${d.year}: ${d.count.toLocaleString('en-CA')}`),
+].join('. ');
 ---
 
 <figure class="chart">
   <figcaption>{title}</figcaption>
-  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={title}>
+  <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={accessibleSummary}>
     <polyline
       fill="none"
       stroke="rgba(245,245,242,0.15)"

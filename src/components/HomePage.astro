@@ -4,6 +4,7 @@ import LegalSpendBars from '../components/LegalSpendBars.astro';
 import StatIcon from '../components/StatIcon.astro';
 import SourcesList from '../components/SourcesList.astro';
 import { home } from '../content/home';
+import { callToAction, callToActionPaths } from '../content/call-to-action';
 import { pageSourceIds } from '../content/sources';
 import { siteConfig } from '../site.config';
 import type { Lang } from '../content/ui';
@@ -17,9 +18,35 @@ interface Props {
 const { lang, path } = Astro.props;
 const t = home[lang];
 const nav = ui[lang].nav;
+const cta = callToAction[lang];
+const ctaPaths = callToActionPaths[lang];
+const about = siteConfig.about[lang];
+const sourceAnchors =
+  lang === 'fr'
+    ? [
+        { href: '#sources-home', label: 'SOFI / états' },
+        { href: '#sources-home', label: 'données effectif' },
+        { href: '#sources-home', label: 'lettre ministère' },
+      ]
+    : [
+        { href: '#sources-home', label: 'SOFI / statements' },
+        { href: '#sources-home', label: 'enrolment data' },
+        { href: '#sources-home', label: 'Ministry letter' },
+      ];
 ---
 
 <Layout lang={lang} title={t.title} description={t.description} path={path}>
+  <section class="election-banner">
+    <div class="container-page election-banner-inner">
+      <div class="election-copy">
+        <p class="election-eyebrow">{cta.bannerEyebrow}</p>
+        <p class="election-title font-display">{cta.bannerTitle}</p>
+        <p class="election-body">{cta.bannerBody}</p>
+      </div>
+      <a class="btn-primary election-cta" href={ctaPaths.hub}>{cta.bannerCta}</a>
+    </div>
+  </section>
+
   <section class="hero">
     <div class="hero-media" aria-hidden="true">
       <video
@@ -29,6 +56,7 @@ const nav = ui[lang].nav;
         loop
         playsinline
         poster="/images/hero-poster.jpg"
+        data-hero-video
       >
         <source src="/video/courtroom.mp4" type="video/mp4" />
       </video>
@@ -42,7 +70,7 @@ const nav = ui[lang].nav;
       </h1>
       <p class="support rise-in rise-in-delay-2">{t.heroSupport}</p>
       <div class="cta-row rise-in rise-in-delay-3">
-        <a class="btn-primary" href={siteConfig.changeOrgUrl}>{nav.sign}</a>
+        <a class="btn-primary" href={ctaPaths.hub}>{cta.bannerCta}</a>
         <a class="btn-secondary" href={lang === 'fr' ? '/frais-juridiques' : '/en/legal-fees'}>{nav.evidence}</a>
       </div>
     </div>
@@ -59,13 +87,16 @@ const nav = ui[lang].nav;
   <section class="section stats-band">
     <div class="container-page stats-grid">
       {
-        t.stats.map((stat) => (
+        t.stats.map((stat, i) => (
           <article class:list={['stat', `stat-${stat.icon}`]}>
             <div class="stat-top">
               <StatIcon kind={stat.icon} />
               <div class="mega-stat heat">{stat.value}</div>
             </div>
-            <p>{stat.label}</p>
+            <p>
+              {stat.label}
+              <a class="cite" href={sourceAnchors[i]?.href ?? '#sources-home'}>[{i + 1}]</a>
+            </p>
           </article>
         ))
       }
@@ -124,16 +155,16 @@ const nav = ui[lang].nav;
     </div>
   </section>
 
-  <section class="section">
+  <section class="section panel" aria-labelledby="about-heading">
     <div class="container-page">
-      <div class="reading">
-        <h2 class="font-display">{t.who.title}</h2>
-        <p>{t.who.body}</p>
+      <div class="reading about-block">
+        <h2 id="about-heading" class="font-display">{about.title}</h2>
+        <p>{about.body}</p>
       </div>
     </div>
   </section>
 
-  <section class="section panel">
+  <section class="section" id="sources-home">
     <div class="container-page">
       <div class="reading">
         <h2 class="font-display">{t.faqTitle}</h2>
@@ -153,7 +184,72 @@ const nav = ui[lang].nav;
   </section>
 </Layout>
 
+<script>
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (video) {
+    const mq = window.matchMedia('(max-width: 819px)');
+    const sync = () => {
+      if (mq.matches) {
+        video.removeAttribute('autoplay');
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+        video.style.display = 'none';
+        const media = video.parentElement;
+        if (media) {
+          media.classList.add('hero-media-poster');
+        }
+      }
+    };
+    sync();
+    mq.addEventListener('change', sync);
+  }
+</script>
+
 <style>
+  .election-banner {
+    background:
+      linear-gradient(90deg, rgba(253, 62, 18, 0.18), rgba(0, 0, 0, 0.55)),
+      #120806;
+    border-bottom: 1px solid rgba(253, 62, 18, 0.35);
+    padding: 1rem 0;
+  }
+  .election-banner-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+  }
+  .election-eyebrow {
+    margin: 0 0 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #ffb4a4;
+  }
+  .election-title {
+    margin: 0 0 0.35rem;
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    letter-spacing: -0.03em;
+  }
+  .election-body {
+    margin: 0;
+    max-width: 40rem;
+    color: rgba(245, 245, 242, 0.88);
+    line-height: 1.45;
+    font-size: 0.98rem;
+  }
+  .election-cta {
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .about-block p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(245, 245, 242, 0.9);
+  }
   .hero {
     position: relative;
     min-height: 100vh;
@@ -413,8 +509,12 @@ const nav = ui[lang].nav;
     .hero-video {
       display: none;
     }
-    .hero-media {
+    .hero-media,
+    .hero-media-poster {
       background: #000 url('/images/hero-poster.jpg') center / cover;
     }
+  }
+  .hero-media-poster {
+    background: #000 url('/images/hero-poster.jpg') center / cover;
   }
 </style>

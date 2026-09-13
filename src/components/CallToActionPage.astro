@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { callToAction, callToActionPaths } from '../content/call-to-action';
+import type { Lang } from '../content/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = callToAction[lang];
+const paths = callToActionPaths[lang];
+---
+
+<Layout lang={lang} title={t.hubTitle} description={t.hubDescription} path={path}>
+  <section class="section cta-hub">
+    <div class="container-page">
+      <header class="page-head">
+        <h1 class="font-display page-title">{t.hubH1}</h1>
+        <p class="lead">{t.hubLead}</p>
+      </header>
+
+      <div class="actions">
+        <article class="action-card">
+          <h2 class="font-display">{t.actionEmailTitle}</h2>
+          <p>{t.actionEmailBody}</p>
+          <a class="btn-primary" href={paths.email}>{t.actionEmailCta}</a>
+        </article>
+        <article class="action-card">
+          <h2 class="font-display">{t.actionVoteTitle}</h2>
+          <p>{t.actionVoteBody}</p>
+          <a class="btn-primary" href={paths.vote}>{t.actionVoteCta}</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cta-hub {
+    padding-bottom: clamp(4rem, 10vw, 6rem);
+  }
+  .page-head {
+    margin-bottom: 2.25rem;
+    max-width: 44rem;
+  }
+  .page-title {
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 1rem;
+    line-height: 1.05;
+  }
+  .lead {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.4vw, 1.18rem);
+    line-height: 1.6;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .actions {
+    display: grid;
+    gap: 1rem;
+  }
+  @media (min-width: 800px) {
+    .actions {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+  }
+  .action-card {
+    padding: 1.35rem 1.25rem 1.5rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-top: 3px solid var(--color-heat);
+    display: grid;
+    gap: 0.85rem;
+    align-content: start;
+  }
+  .action-card h2 {
+    margin: 0;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    letter-spacing: -0.03em;
+  }
+  .action-card p {
+    margin: 0;
+    line-height: 1.55;
+    color: rgba(245, 245, 242, 0.88);
+  }
+  .action-card .btn-primary {
+    justify-self: start;
+    text-decoration: none;
+  }
+</style>

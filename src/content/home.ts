@@ -6,8 +6,8 @@ export const home = {
     description:
       'Parents du CSF : oui à l’éducation en français, non au financement des procès par l’argent des élèves.',
     heroEyebrow: 'Créé par des parents d’élèves du CSF',
-    heroLine1: 'Des millions dépensés en cour.',
-    heroLine2: 'Des élèves qui souffrent.',
+    heroLine1: 'Des dizaines de millions dépensés en cour.',
+    heroLine2: 'Moins d’argent pour les élèves.',
     heroSupport:
       'Nous soutenons l’expansion de l’éducation en français en C.-B. — mais des batailles juridiques sans fin ne doivent pas se faire au détriment des élèves d’aujourd’hui.',
     barsCaption: 'Paiements à Juristes Power Law — cinq derniers exercices¹',
@@ -16,7 +16,7 @@ export const home = {
       {
         icon: 'up' as const,
         value: '8,9 M$',
-        label: 'dépensés chez Juristes Power en 2024–25 seulement (~7,7 % du budget d’exploitation)',
+        label: 'dépensés en batailles juridiques en 2024–25 seulement (~7,7 % du budget d’exploitation)',
       },
       {
         icon: 'down' as const,
@@ -86,8 +86,8 @@ export const home = {
     description:
       'CSF parents: yes to French education, no to funding court fights with student operating dollars.',
     heroEyebrow: 'Created by parents of CSF students',
-    heroLine1: 'Millions spent in court.',
-    heroLine2: 'Students suffering.',
+    heroLine1: 'Tens of millions spent in court.',
+    heroLine2: 'Less money for students.',
     heroSupport:
       'We support expanding French-language education in B.C. — but never-ending legal fights must not come at the expense of today’s students.',
     barsCaption: 'Payments to Juristes Power Law — last five fiscal years¹',
@@ -96,7 +96,7 @@ export const home = {
       {
         icon: 'up' as const,
         value: '$8.9M',
-        label: 'spent on Juristes Power in 2024–25 alone (~7.7% of operating expenses)',
+        label: 'spent on legal battles in 2024–25 alone (~7.7% of operating expenses)',
       },
       {
         icon: 'down' as const,

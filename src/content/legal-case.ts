@@ -7,6 +7,8 @@ export type TimelineItem = {
 
 export type CaseAppeal = {
   title: string;
+  statusTitle: string;
+  statusItems: string[];
   timeline: TimelineItem[];
   partnersTitle: string;
   partners: string[];
@@ -39,8 +41,43 @@ export type BiggerPicture = {
   refs: { label: string; href: string }[];
 };
 
+export type GlossaryEntry = {
+  term: string;
+  def: string;
+};
+
 export const legalCaseDeep = {
   fr: {
+    oneMinuteTitle: 'En une minute',
+    oneMinuteBody:
+      'Depuis 2010, le CSF poursuit la Province sous l’article 23 de la Charte pour sous-financement et installations inadéquates. La vague A a fait reconnaître des manquements et a produit des déclarations et dommages importants (CSC 2020), mais pas le programme de construction d’environ 300 M$ demandé. La vague B (exécution) a donné des résultats mitigés en mai 2025. Le CSF, la Province et le VSB ont ensuite formé des appels et appels incidents; début 2026, la Cour d’appel a limité le mémoire du CSF à 60 pages, et les dates d’audience ne sont pas encore confirmées publiquement.',
+    glossaryTitle: 'Petit glossaire',
+    glossary: [
+      {
+        term: 'Article 23',
+        def: 'Disposition de la Charte canadienne qui protège le droit à l’instruction dans la langue de la minorité (ici, le français en C.-B.), lorsque les conditions d’application sont réunies.',
+      },
+      {
+        term: 'Fonds d’exploitation',
+        def: 'Budget annuel de fonctionnement d’un conseil scolaire (salaires, services aux élèves, transport, etc.) — distinct du financement des bâtiments.',
+      },
+      {
+        term: 'Financement en capital',
+        def: 'Argent provincial pour construire, agrandir ou rénover des écoles. Il passe par des plans de capital et des priorités concurrentielles, pas par un « chéquier » automatique après un jugement.',
+      },
+      {
+        term: 'SOFI',
+        def: 'Statement of Financial Information : rapport public listant, entre autres, les fournisseurs payés au-delà d’un seuil (utile pour retracer les honoraires juridiques).',
+      },
+      {
+        term: 'Appel',
+        def: 'Procédure pour contester un jugement de première instance devant une cour supérieure. Un appel incident est l’appel déposé par une autre partie en réponse.',
+      },
+      {
+        term: 'Expropriation',
+        def: 'Pouvoir légal d’acquérir un bien privé pour un usage public (ici, un site scolaire), généralement en dernier recours et sous conditions — notamment l’approbation ministérielle.',
+      },
+    ] satisfies GlossaryEntry[],
     winsTitle: 'Faits saillants et résultats majeurs',
     winsLead:
       'Les droits linguistiques du CSF sont réels — et ont été reconnus. « Succès partiel » et « gain majeur » ne veulent pas dire que la cour a ordonné de construire toutes les écoles demandées, ni d’ouvrir le budget de capital provincial sans limite.',
@@ -106,7 +143,7 @@ export const legalCaseDeep = {
         ],
         achievedTitle: 'Obtenu',
         achieved: [
-          'Ordonnance à la Province de légiférer (délai de six mois au jugement) pour donner au CSF un pouvoir d’expropriation — le seul conseil scolaire provincial qui n’en avait pas.',
+          'Ordonnance à la Province de légiférer (délai de six mois au jugement) pour donner au CSF un pouvoir d’expropriation — le seul conseil scolaire provincial qui n’en avait pas. La législature a ensuite prévu des modifications à la School Act (projet de loi 27, 2025) étendant ce pouvoir à l’autorité scolaire francophone, sous réserve d’approbation ministérielle.',
           'Démarches concrètes ordonnées sur certains sites à Vancouver (négociation et/ou transfert selon le site).',
           'Constat de retards et de non-divulgation budgétaire côté Province.',
           'Devoir du VSB de pondérer l’article 23 lorsqu’il traite de sites scolaires excédentaires.',
@@ -120,12 +157,26 @@ export const legalCaseDeep = {
         ],
         appeal: {
           title: 'L’appel et la situation actuelle',
+          statusTitle: 'État actuel',
+          statusItems: [
+            'Appels déposés : CSF, appel incident du VSB, et appel de la Province (dont le pouvoir d’expropriation).',
+            'Début 2026 (décision procédurale BCCA sur la longueur du mémoire) : la Cour d’appel a refusé la demande du CSF d’environ 120 pages et a autorisé 60 pages (Canadian Lawyer).',
+            'Dates d’audience non encore confirmées dans les reportages publics.',
+            'Expropriation : en mai 2025, la cour a ordonné à la Province de légiférer; le projet de loi 27 (2025) prévoit des modifications à la School Act étendant le pouvoir d’expropriation à l’autorité scolaire francophone, sous réserve d’approbation ministérielle.',
+          ],
           timeline: [
             { label: 'Dépôt de l’appel CSF', date: 'juin 2025 (signalé publiquement le 26 juin 2025)' },
             { label: 'Appel incident VSB', date: '8 juillet 2025 (notamment Laurier)' },
             { label: 'Appel Province', date: 'été 2025 (dont pouvoir d’expropriation)' },
             { label: 'Décision sur les dépens', date: 'octobre 2025 (65 % VSB; procès prolongé)' },
-            { label: 'Audience en Cour d’appel', date: 'dates non fixées (reportages publics disponibles)' },
+            {
+              label: 'Décision procédurale BCCA (longueur du mémoire)',
+              date: 'début 2026 — CSF demandait ~120 pages; 60 autorisées (Canadian Lawyer)',
+            },
+            {
+              label: 'Audience en Cour d’appel',
+              date: 'Dates d’audience non encore confirmées dans les reportages publics',
+            },
           ],
           partnersTitle: 'Consultation des partenaires (5 sur 6)',
           partners: [
@@ -133,9 +184,9 @@ export const legalCaseDeep = {
             'Selon Véronique Fleury (SCFP 4227, Francopresse), cinq des six ont dit non à l’appel; le CSF a quand même confirmé l’appel fin juin 2025.',
             'Par la suite, des porte-paroles de la FPFCB et de la FFCB ont affirmé publiquement (Radio-Canada) que l’appel était nécessaire; le SEPF et le SCFP 4227 sont restés opposés.',
           ],
-          summaryTitle: 'Résumé de l’appel',
+          summaryTitle: 'Résumé de l’appel en cours',
           summary: [
-            'Après le jugement Gomery, le CSF a porté appel; le VSB a formé un appel incident; la Province a aussi contesté certains aspects. Les dates d’audience en Cour d’appel n’étaient pas encore fixées dans les reportages publics disponibles.',
+            'Après le jugement Gomery, le CSF a porté appel; le VSB a formé un appel incident; la Province a aussi contesté certains aspects. Pour l’état actuel (longueur du mémoire, dates d’audience, expropriation), voir l’encadré de statut ci-dessus.',
             'En octobre 2025, le juge Gomery a tranché les dépens : le VSB doit rembourser 65 % des dépens du CSF pour la portion VSB, mais le CSF a été privé d’une partie des dépens parce que le procès avait été prolongé. Le montant peut encore changer selon l’appel.',
           ],
           goalsTitle: 'Objectifs de l’appel',
@@ -145,8 +196,7 @@ export const legalCaseDeep = {
             'Contester les limites du jugement de mai 2025 — notamment le refus de supervision judiciaire continue, le bail de 99 ans jugé suffisant pour Queen Elizabeth Annex, et l’absence d’ordonnance immédiate pour A.R. Lord.',
             'Préserver et renforcer les gains déjà obtenus (expropriation, obligations de négociation / sites, devoir de pondération du VSB) face aux appels de la Province et du VSB.',
           ],
-          chancesTitle:
-            'Nous ne sommes pas avocats, mais voici ce que nous pensons des chances de succès de l’appel…',
+          chancesTitle: 'Notre évaluation (nous ne sommes pas avocats)',
           chances: [
             'Le jugement de mai 2025 était déjà un succès partiel : élargir fortement les remèdes en appel est une pente raide.',
             'La Cour d’appel intervient peu sur les remèdes discrétionnaires et les conclusions de fait — surtout la responsabilité partagée des retards et le refus de supervision continue.',
@@ -158,6 +208,18 @@ export const legalCaseDeep = {
           {
             label: '2025 BCSC 962 (CanLII)',
             href: 'https://www.canlii.org/en/bc/bcsc/doc/2025/2025bcsc962/2025bcsc962.html',
+          },
+          {
+            label: 'Canadian Lawyer — mémoire BCCA (longueur)',
+            href: 'https://www.canadianlawyermag.com/news/general/bcca-denies-french-school-boards-bid-for-lengthy-factums-in-appeal-with-long-history-trial-record/393546',
+          },
+          {
+            label: 'Projet de loi 27 (2025) — School Act / expropriation',
+            href: 'https://www.bclaws.gov.bc.ca/civix/document/id/bills/billsprevious/1st43rd:gov27-3',
+          },
+          {
+            label: 'Gouv. C.-B. — introduction du projet de loi (School Act)',
+            href: 'https://news.gov.bc.ca/releases/2025TT0106-000981',
           },
           {
             label: 'Francopresse — consultation / 5 partenaires sur 6',
@@ -186,8 +248,8 @@ export const legalCaseDeep = {
       title: 'Le portrait d’ensemble — cour et budget de capital',
       paragraphs: [
         'Zoom arrière : même quand un conseil gagne en cour, cela clarifie surtout des obligations juridiques. Le financement des nouvelles écoles reste un processus provincial concurrentiel. Budget 2024 : environ 1,046 G$ de capital K-12 pour 2024–25, et environ 3,752 G$ sur trois ans (expansion/remplacement, mitigation sismique, réhabilitation). Ces enveloppes servent toute la province — districts en forte croissance, écoles à risque sismique, bâtiments vieillissants.',
-        'Un programme de construction d’environ 300 M$ ordonné par la cour aurait représenté une part considérable de ce cadre annuel. Même avec des déclarations favorables et un pouvoir d’expropriation, le CSF doit encore faire prioriser ses projets dans le plan de capital provincial — à côté de dizaines d’autres demandes scolaires.',
         'En somme : la salle d’audience et le Trésor ne sont pas la même chose. Un jugement peut ouvrir des portes; les dollars de construction passent encore par les priorités budgétaires de Victoria.',
+        'Peut-être le CSF peut-il envisager une autre stratégie : plutôt que des batailles juridiques, concentrer les efforts sur le lobbying pour des priorités de financement précises, avec l’appui des communautés et d’autres partenaires.',
       ],
       refs: [
         {
@@ -202,6 +264,36 @@ export const legalCaseDeep = {
     },
   },
   en: {
+    oneMinuteTitle: 'In one minute',
+    oneMinuteBody:
+      'Since 2010, CSF has sued the Province under Charter section 23 over underfunding and inadequate French-language facilities. Wave A secured recognition of breaches plus important declarations and damages (SCC 2020), but not the ~$300M court-ordered build program sought. Wave B (enforcement) produced mixed results in May 2025. CSF, the Province, and VSB then filed appeals and cross-appeals; in early 2026 the Court of Appeal limited CSF’s factum to 60 pages, and hearing dates are not yet confirmed in public reporting.',
+    glossaryTitle: 'Quick glossary',
+    glossary: [
+      {
+        term: 'Section 23',
+        def: 'Charter provision protecting minority-language education rights (here, French in B.C.) where the constitutional conditions are met.',
+      },
+      {
+        term: 'Operating fund',
+        def: 'A school board’s annual operating budget (salaries, student services, transportation, etc.) — separate from capital funding for buildings.',
+      },
+      {
+        term: 'Capital funding',
+        def: 'Provincial money to build, expand, or renovate schools. It runs through capital plans and competing priorities — not an automatic chequebook after a court win.',
+      },
+      {
+        term: 'SOFI',
+        def: 'Statement of Financial Information: a public report that lists, among other things, suppliers paid above a threshold (useful for tracking legal fees).',
+      },
+      {
+        term: 'Appeal',
+        def: 'A challenge of a trial judgment in a higher court. A cross-appeal is an appeal filed by another party in response.',
+      },
+      {
+        term: 'Expropriation',
+        def: 'Legal power to acquire private property for a public purpose (here, a school site), usually as a last resort and under conditions — including ministerial approval.',
+      },
+    ] satisfies GlossaryEntry[],
     winsTitle: 'Major results and highlights',
     winsLead:
       'CSF’s language rights are real — and courts have recognized them. “Partial success” and “major win” do not mean the court ordered every school CSF asked for, or opened the provincial capital budget without limit.',
@@ -267,7 +359,7 @@ export const legalCaseDeep = {
         ],
         achievedTitle: 'Achieved',
         achieved: [
-          'Order requiring the Province to legislate (six-month timeline in the judgment) to give CSF expropriation powers — the only provincial board that lacked them.',
+          'Order requiring the Province to legislate (six-month timeline in the judgment) to give CSF expropriation powers — the only provincial board that lacked them. The Legislature later provided School Act amendments (Bill 27, 2025) extending expropriation authority to the francophone education authority, subject to ministerial approval.',
           'Concrete next steps ordered on certain Vancouver sites (negotiation and/or transfer, depending on the site).',
           'Findings of provincial delay and budget non-disclosure.',
           'VSB duty to balance section 23 when dealing with surplus school sites.',
@@ -281,12 +373,26 @@ export const legalCaseDeep = {
         ],
         appeal: {
           title: 'The appeal and current status',
+          statusTitle: 'Current status',
+          statusItems: [
+            'Appeals filed: CSF, VSB cross-appeal, and Province appeal (including expropriation powers).',
+            'Early 2026 (BCCA procedural ruling on factum length): the Court of Appeal refused CSF’s bid for ~120 pages and allowed 60 pages (Canadian Lawyer).',
+            'Hearing dates not yet confirmed in public reporting.',
+            'Expropriation: in May 2025 the court ordered the Province to legislate; Bill 27 (2025) amendments provide for extending expropriation authority to the francophone education authority, subject to ministerial approval.',
+          ],
           timeline: [
             { label: 'CSF appeal filed', date: 'June 2025 (publicly reported 26 June 2025)' },
             { label: 'VSB cross-appeal', date: '8 July 2025 (including Laurier)' },
             { label: 'Province appeal', date: 'Summer 2025 (including expropriation powers)' },
             { label: 'Costs ruling', date: 'October 2025 (65% VSB; trial prolonged)' },
-            { label: 'Court of Appeal hearing', date: 'Dates not yet set (available public reporting)' },
+            {
+              label: 'BCCA procedural ruling (factum length)',
+              date: 'Early 2026 — CSF sought ~120 pages; 60 allowed (Canadian Lawyer)',
+            },
+            {
+              label: 'Court of Appeal hearing',
+              date: 'Hearing dates not yet confirmed in public reporting',
+            },
           ],
           partnersTitle: 'Partner consultation (5 of 6)',
           partners: [
@@ -294,9 +400,9 @@ export const legalCaseDeep = {
             'According to Véronique Fleury (CUPE 4227, Francopresse), five of the six said no to an appeal; CSF confirmed the appeal anyway in late June 2025.',
             'Afterwards, FPFCB and FFCB spokespersons said publicly (Radio-Canada) that an appeal was necessary; SEPF and CUPE 4227 remained opposed.',
           ],
-          summaryTitle: 'Appeal Summary',
+          summaryTitle: 'Summary of current appeal',
           summary: [
-            'After Justice Gomery’s judgment, CSF appealed; VSB filed a cross-appeal; the Province also challenged aspects of the ruling. Court of Appeal hearing dates had not yet been set in available public reporting.',
+            'After Justice Gomery’s judgment, CSF appealed; VSB filed a cross-appeal; the Province also challenged aspects of the ruling. For current status (factum length, hearing dates, expropriation), see the status box above.',
             'In October 2025, Justice Gomery ruled on costs: VSB must pay 65% of CSF’s costs for the VSB portion, but CSF was deprived of part of its recoverable costs because the trial was prolonged. That amount may still change depending on the appeal.',
           ],
           goalsTitle: 'Goals of the appeal',
@@ -306,8 +412,7 @@ export const legalCaseDeep = {
             'Challenge limits in the May 2025 judgment — including the refusal of ongoing court supervision, the finding that a 99-year lease was enough for Queen Elizabeth Annex, and the lack of an immediate A.R. Lord transfer order.',
             'Preserve and strengthen remedies already won (expropriation, negotiation / site obligations, VSB balancing duty) against the Province’s and VSB’s appeals.',
           ],
-          chancesTitle:
-            'We are not lawyers, but here is what we think about the chances of the appeal’s success…',
+          chancesTitle: 'Our assessment (we are not lawyers)',
           chances: [
             'The May 2025 judgment was already a partial win: sharply expanding remedies on appeal is an uphill climb.',
             'Appeal courts rarely rebuild discretionary remedies or fact findings — especially shared blame for delay and the refusal of ongoing court supervision.',
@@ -319,6 +424,18 @@ export const legalCaseDeep = {
           {
             label: '2025 BCSC 962 (CanLII)',
             href: 'https://www.canlii.org/en/bc/bcsc/doc/2025/2025bcsc962/2025bcsc962.html',
+          },
+          {
+            label: 'Canadian Lawyer — BCCA factum length',
+            href: 'https://www.canadianlawyermag.com/news/general/bcca-denies-french-school-boards-bid-for-lengthy-factums-in-appeal-with-long-history-trial-record/393546',
+          },
+          {
+            label: 'Bill 27 (2025) — School Act / expropriation',
+            href: 'https://www.bclaws.gov.bc.ca/civix/document/id/bills/billsprevious/1st43rd:gov27-3',
+          },
+          {
+            label: 'B.C. Gov — bill introduction (School Act)',
+            href: 'https://news.gov.bc.ca/releases/2025TT0106-000981',
           },
           {
             label: 'Francopresse — consultation / 5 of 6 partners',
@@ -347,8 +464,8 @@ export const legalCaseDeep = {
       title: 'The bigger picture — court wins vs capital budgets',
       paragraphs: [
         'Zoom out: even when a board wins in court, that mainly clarifies legal obligations. Funding new schools remains a competitive provincial process. Budget 2024: about $1.046B in K-12 capital for 2024/25, and about $3.752B over three years (expansion/replacement, seismic mitigation, rehabilitation). Those envelopes serve the whole province — high-growth districts, seismic-risk schools, aging buildings.',
-        'A court-ordered ~$300M build package would have been a large claim against that annual framework. Even with favourable declarations and expropriation powers, CSF still needs its projects prioritized in the provincial capital plan — alongside dozens of other school requests.',
         'In short: the courtroom and the Treasury are not the same thing. A judgment can open doors; construction dollars still go through Victoria’s budget priorities.',
+        'Perhaps CSF can look at a different strategy: instead of legal battles, focus on lobbying for specific funding priorities with the support of communities and other stakeholders.',
       ],
       refs: [
         {

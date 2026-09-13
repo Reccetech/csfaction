@@ -6,14 +6,11 @@ export const enrolment = {
     title: 'Effectif — Élèves d’abord',
     description: 'Le CSF perd des élèves chaque année depuis 2021–22.',
     h1: 'Effectif en baisse',
-    lead: 'Nous comprenons que l’effectif dépend de nombreux facteurs et nous ne suggérons aucun lien direct avec les dépenses juridiques. Nous soulignons seulement, à un niveau plus général, que le CSF a perdu des élèves chaque année de 2021–22 à 2025–26. Se battre pour de nouvelles écoles pendant que les écoles existantes souffrent et déclinent paraît contre-intuitif.',
+    lead: 'Nous comprenons que l’effectif dépend de nombreux facteurs et nous ne suggérons aucun lien direct avec les dépenses juridiques. Nous soulignons seulement, à un niveau plus général, que le CSF a perdu des élèves chaque année de 2021–22 à 2025–26. Se battre pour de nouvelles écoles pendant que les écoles existantes voient leur effectif baisser paraît contre-intuitif.',
     chartTitle: 'Effectif district (tête)',
     schoolsTitle: 'Grandes baisses dans les écoles',
     schoolsIntro:
       'Parmi les grandes écoles, Victor-Brodeur a perdu le plus d’élèves en absolu (−217, −32 %).',
-    closeTitle: 'Ce que cela signifie',
-    closeBody:
-      'Les parents veulent des écoles dynamiques de haute qualité qui encouragent l’apprentissage. Le CSF a aussi des défis particuliers, comme des coûts de transport plus élevés pour répondre aux besoins des élèves. Tout cela exige que chaque dollar du financement des élèves aille aux élèves. Il faut cesser de vider le fonds d’exploitation pour des procès pendant que l’effectif chute.',
     sourcesIntro:
       'Données tirées du jeu ouvert du ministère (inscription / FTE). Les baisses d’écoles ci-dessus sont calculées à partir de ces fichiers.',
     schools: [
@@ -27,14 +24,11 @@ export const enrolment = {
     title: 'Enrolment — CSF Students First',
     description: 'CSF has lost students every year since 2021–22.',
     h1: 'Falling enrolment',
-    lead: 'We understand that student enrolment is shaped by many different factors, and we are not suggesting any direct correlation to legal spending. We are only making the higher-level point that CSF lost students every year from 2021–22 to 2025–26. Fighting for new schools while the existing schools suffer and decline seems counterintuitive.',
+    lead: 'We understand that student enrolment is shaped by many different factors, and we are not suggesting any direct correlation to legal spending. We are only making the higher-level point that CSF lost students every year from 2021–22 to 2025–26. Fighting for new schools while the existing schools have enrolment decline seems counterintuitive.',
     chartTitle: 'District enrolment (headcount)',
     schoolsTitle: 'Largest school declines',
     schoolsIntro:
       'Among larger schools, Victor-Brodeur saw the biggest absolute drop (−217, −32%).',
-    closeTitle: 'What this means',
-    closeBody:
-      'Parents want high-quality, vibrant schools that encourage learning. CSF also has unique challenges, such as higher transportation costs to meet student needs. That all requires every dollar of student funding to go to students. We need to stop draining the operating fund for litigation while enrolment falls.',
     sourcesIntro:
       'Figures from the Ministry open dataset (enrolment / FTE). School declines above are calculated from those files.',
     schools: [
@@ -52,7 +46,7 @@ export const legal = {
     description:
       'Depuis 2010 : droits linguistiques, gains majeurs, puis une vague d’exécution coûteuse — plus de 35 M$ en honoraires côté CSF.',
     h1: 'État du dossier et frais juridiques',
-    lead: 'Les droits linguistiques comptent. Voici ce que le CSF a obtenu — et pourquoi la poursuite coûteuse en cours pourrait ne pas apporter grand-chose.',
+    lead: 'Les droits linguistiques comptent. Voici ce que le CSF a obtenu en cour — et pourquoi la voie judiciaire en cours pourrait coûter très cher pour des rendements décroissants.',
 
     fightTitle: 'Ce pour quoi le CSF se battait',
     fightBody:
@@ -93,19 +87,19 @@ export const legal = {
         sourceLabel: 'SOFI CSF',
       },
       {
-        label: 'Estimation durée de vie — honoraires CSF',
+        label: 'Estimation — honoraires CSF (durée)',
         value: '> 35 M$',
         href: sources.cbc2016.href,
         sourceLabel: 'CBC + SOFI (estim.)',
       },
       {
-        label: 'Toutes parties (CSF + défense Province/VSB)',
+        label: 'Estimation — toutes parties (CSF + défense Province/VSB)',
         value: '> 40–45 M$',
         href: sources.radioCanadaWaveBCosts.href,
         sourceLabel: 'Radio-Canada (estim.)',
       },
     ],
-    estimateNote: `${estimateNotes.fr.lifetime} ${estimateNotes.fr.allParties}`,
+    estimateNote: `Ce sont des estimations, pas des totaux consolidés vérifiés. ${estimateNotes.fr.lifetime} ${estimateNotes.fr.allParties}`,
     opportunityTitle: 'Coût d’opportunité',
     opportunityBody:
       'En 2024–25, les paiements à Juristes Power (~8,9 M$) représentaient près de 28 % de la masse salariale enseignante (SOFI vs salaires enseignants, AFS 2024–25, annexe 2B) — environ 1 $ en honoraires pour 4 $ versés aux enseignants.',
@@ -123,7 +117,7 @@ export const legal = {
     description:
       'Since 2010: language rights, major wins, then a costly enforcement wave — CSF counsel spend well over $35M.',
     h1: 'State of the case and legal fees',
-    lead: 'Language rights matter. Here is what CSF fought for and won — and why the ongoing expensive court path might not deliver much.',
+    lead: 'Language rights matter. Here is what CSF fought for and won in court — and why the ongoing litigation path may be costing big dollars for diminishing returns.',
 
     fightTitle: 'What CSF has been fighting for',
     fightBody:
@@ -164,19 +158,19 @@ export const legal = {
         sourceLabel: 'CSF SOFI',
       },
       {
-        label: 'Lifetime estimate — CSF counsel',
+        label: 'Estimate — lifetime CSF counsel',
         value: '>$35M',
         href: sources.cbc2016.href,
         sourceLabel: 'CBC + SOFI (est.)',
       },
       {
-        label: 'All parties (CSF + Province/VSB defence)',
+        label: 'Estimate — all parties (CSF + Province/VSB defence)',
         value: '>$40–45M',
         href: sources.radioCanadaWaveBCosts.href,
         sourceLabel: 'Radio-Canada (est.)',
       },
     ],
-    estimateNote: `${estimateNotes.en.lifetime} ${estimateNotes.en.allParties}`,
+    estimateNote: `These are estimates, not audited consolidated totals. ${estimateNotes.en.lifetime} ${estimateNotes.en.allParties}`,
     opportunityTitle: 'Opportunity cost',
     opportunityBody:
       'In 2024–25, Juristes Power payments (~$8.9M) were nearly 28% of teacher salaries (SOFI vs teacher salaries, AFS 2024–25 Schedule 2B) — roughly $1 in legal fees for every $4 paid to teachers.',

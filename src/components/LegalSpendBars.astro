@@ -11,13 +11,18 @@ interface Props {
 
 const { lang, caption, totalLabel, fullBleed = false } = Astro.props;
 const max = Math.max(...legalSpendSeries.map((d) => d.amount));
+const accessibleSummary = [
+  caption,
+  ...legalSpendSeries.map((d) => `${d.year}: ${formatCadFull(d.amount, lang)}`),
+  `${totalLabel}: ${formatCadFull(legalSpendTotal, lang)}`,
+].join('. ');
 ---
 
 <div class:list={['bars-wrap', { 'bars-bleed': fullBleed }]} data-legal-bars>
   <div class="bars-chrome">
     <p class="caption">{caption}</p>
   </div>
-  <div class="bars" role="img" aria-label={caption}>
+  <div class="bars" role="img" aria-label={accessibleSummary}>
     {
       legalSpendSeries.map((d) => {
         const height = Math.max(10, Math.round((d.amount / max) * 100));

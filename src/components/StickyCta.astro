@@ -1,7 +1,6 @@
 ---
 import type { Lang } from '../content/ui';
-import { ui } from '../content/ui';
-import { siteConfig } from '../site.config';
+import { routes, ui } from '../content/ui';
 
 interface Props {
   lang: Lang;
@@ -9,9 +8,10 @@ interface Props {
 
 const { lang } = Astro.props;
 const label = ui[lang].stickyCta;
+const href = routes[lang].callToAction;
 ---
 
-<a class="sticky-cta btn-primary" href={siteConfig.changeOrgUrl}>{label}</a>
+<a class="sticky-cta btn-primary" href={href}>{label}</a>
 
 <style>
   .sticky-cta {

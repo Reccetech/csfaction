@@ -1,8 +1,16 @@
 export const siteConfig = {
   brandFr: 'CSF Élèves d’abord',
   brandEn: 'CSF Students First',
-  changeOrgUrl: '#petition', // Replace when Change.org petition is live
-  contactEmail: '',
+  about: {
+    fr: {
+      title: 'À propos de ce projet',
+      body: 'CSF Élèves d’abord est un site indépendant créé par des parents d’élèves du CSF. Il n’est affilié ni au CSF, ni au ministère, ni au SEPF, ni au SCFP, etc.',
+    },
+    en: {
+      title: 'About this project',
+      body: 'CSF Students First is an independent site created by parents of CSF students. It is not affiliated with CSF, the Ministry, SEPF, CUPE, etc.',
+    },
+  },
 };
 
 export const legalSpendSeries = [

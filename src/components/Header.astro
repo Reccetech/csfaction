@@ -1,7 +1,6 @@
 ---
 import type { Lang } from '../content/ui';
 import { routes, twinPath, ui } from '../content/ui';
-import { siteConfig } from '../site.config';
 
 interface Props {
   lang: Lang;
@@ -14,16 +13,19 @@ const r = routes[lang];
 const twin = twinPath(lang, path);
 const links = [
   { href: r.home, label: t.nav.home },
+  { href: r.callToAction, label: t.nav.callToAction },
   { href: r.enrolment, label: t.nav.enrolment },
   { href: r.legal, label: t.nav.legal },
   { href: r.pushback, label: t.nav.pushback },
 ];
+const menuLabel = lang === 'fr' ? 'Menu' : 'Menu';
+const closeLabel = lang === 'fr' ? 'Fermer' : 'Close';
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="container-page header-inner">
     <a class="brand font-display" href={r.home}>{t.brand}</a>
-    <nav class="nav" aria-label={lang === 'fr' ? 'Principal' : 'Primary'}>
+    <nav class="nav desktop-nav" aria-label={lang === 'fr' ? 'Principal' : 'Primary'}>
       {
         links.map((link) => (
           <a
@@ -37,10 +39,71 @@ const links = [
     </nav>
     <div class="header-actions">
       <a class="lang" href={twin} hreflang={lang === 'fr' ? 'en' : 'fr'}>{t.langSwitch}</a>
-      <a class="btn-primary header-cta" href={siteConfig.changeOrgUrl}>{t.nav.sign}</a>
+      <a class="btn-primary header-cta" href={r.callToAction}>{t.stickyCta}</a>
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="menu-toggle-label" data-menu-label>{menuLabel}</span>
+        <span class="menu-toggle-bars" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
+
+  <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+    <nav aria-label={lang === 'fr' ? 'Menu mobile' : 'Mobile'}>
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={['mobile-link', { active: path === link.href || (link.href !== r.home && path.startsWith(link.href)) }]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a class="mobile-link mobile-cta" href={r.callToAction}>{t.stickyCta}</a>
+      <a class="mobile-link" href={twin} hreflang={lang === 'fr' ? 'en' : 'fr'}>{t.langSwitch}</a>
+    </nav>
+  </div>
 </header>
+
+<script define:vars={{ menuLabel, closeLabel }}>
+  const header = document.querySelector('[data-site-header]');
+  if (header) {
+    const toggle = header.querySelector('[data-menu-toggle]');
+    const panel = header.querySelector('[data-mobile-nav]');
+    const label = header.querySelector('[data-menu-label]');
+    if (toggle instanceof HTMLButtonElement && panel instanceof HTMLElement && label) {
+      const setOpen = (open) => {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.hidden = !open;
+        label.textContent = open ? closeLabel : menuLabel;
+        document.body.classList.toggle('nav-open', open);
+      };
+
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        setOpen(open);
+        if (open) toggle.focus();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          toggle.focus();
+        }
+      });
+
+      panel.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setOpen(false));
+      });
+    }
+  }
+</script>
 
 <style>
   .site-header {
@@ -63,7 +126,7 @@ const links = [
     text-decoration: none;
     white-space: nowrap;
   }
-  .nav {
+  .desktop-nav {
     display: none;
     gap: 1.1rem;
     margin-left: 1rem;
@@ -94,12 +157,60 @@ const links = [
     padding: 0.55rem 0.9rem;
     font-size: 0.85rem;
   }
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid rgba(245, 245, 242, 0.28);
+    background: transparent;
+    color: var(--color-snow);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .menu-toggle-bars {
+    width: 1rem;
+    height: 0.7rem;
+    border-block: 2px solid currentColor;
+    background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat;
+  }
+  .mobile-nav {
+    border-top: 1px solid rgba(245, 245, 242, 0.08);
+    background: rgba(0, 0, 0, 0.96);
+    padding: 0.75rem var(--page-gutter) 1rem;
+  }
+  .mobile-nav nav {
+    display: grid;
+    gap: 0.15rem;
+    max-width: var(--page-max);
+    margin-inline: auto;
+  }
+  .mobile-link {
+    display: block;
+    padding: 0.85rem 0.2rem;
+    text-decoration: none;
+    color: var(--color-snow);
+    border-bottom: 1px solid rgba(245, 245, 242, 0.08);
+    font-weight: 600;
+  }
+  .mobile-link.active {
+    color: var(--color-heat);
+  }
+  .mobile-cta {
+    color: var(--color-heat);
+  }
   @media (min-width: 820px) {
-    .nav {
+    .desktop-nav {
       display: flex;
     }
     .header-cta {
       display: inline-flex;
+    }
+    .menu-toggle,
+    .mobile-nav {
+      display: none !important;
     }
   }
 </style>

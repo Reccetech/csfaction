@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { callToAction, callToActionPaths } from '../content/call-to-action';
+import { electionMeta } from '../content/candidates';
+import type { Lang } from '../content/ui';
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const t = callToAction[lang];
+const paths = callToActionPaths[lang];
+---
+
+<Layout lang={lang} title={t.votePageTitle} description={t.votePageDescription} path={path}>
+  <section class="section vote-page">
+    <div class="container-page">
+      <p class="back"><a href={paths.hub}>{t.backHub}</a></p>
+      <header class="page-head">
+        <h1 class="font-display page-title">{t.voteH1}</h1>
+        <p class="lead">{t.voteLead}</p>
+      </header>
+
+      <div class="reading">
+        <h2 class="font-display">{t.voteStepsTitle}</h2>
+        <ol class="steps">
+          {t.voteSteps.map((step, i) => (
+            <li>
+              {i === 0 ? (
+                <>
+                  {step}{' '}
+                  <a href={electionMeta.candidatesUrl} target="_blank" rel="noopener noreferrer">
+                    {electionMeta.candidatesUrl}
+                  </a>
+                </>
+              ) : (
+                step
+              )}
+            </li>
+          ))}
+        </ol>
+
+        <div class="tip">
+          <h3 class="font-display">{t.voteTipTitle}</h3>
+          <p>{t.voteTipBody}</p>
+        </div>
+
+        <div class="links">
+          <a class="btn-primary" href={electionMeta.candidatesUrl} target="_blank" rel="noopener noreferrer">
+            {t.candidatesLink}
+          </a>
+          <a class="btn-secondary" href={`mailto:${electionMeta.electionsEmail}`}>{t.emailElections}</a>
+          <a class="btn-secondary" href={paths.email}>{callToAction[lang].actionEmailCta}</a>
+        </div>
+
+        <div class="next-steps">
+          <h3 class="font-display">{lang === 'fr' ? 'Ensuite' : 'Next'}</h3>
+          <ul>
+            <li>
+              <a href={paths.email}>{lang === 'fr' ? 'Écrire aux candidat·e·s' : 'Email the candidates'}</a>
+            </li>
+            <li>
+              <button class="share-btn" type="button" data-share-page>
+                {lang === 'fr' ? 'Partager cette page' : 'Share this page'}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const share = document.querySelector('[data-share-page]');
+  if (share instanceof HTMLButtonElement) {
+    share.addEventListener('click', async () => {
+      const url = window.location.href;
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: document.title, url });
+          return;
+        } catch {
+          /* fall through */
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        share.textContent = share.textContent?.includes('Partager') ? 'Lien copié' : 'Link copied';
+      } catch {
+        /* ignore */
+      }
+    });
+  }
+</script>
+
+<style>
+  .vote-page {
+    padding-bottom: clamp(4rem, 10vw, 6rem);
+  }
+  .back {
+    margin: 0 0 1rem;
+  }
+  .back a {
+    color: var(--color-mute);
+    text-decoration: none;
+  }
+  .back a:hover {
+    color: var(--color-snow);
+  }
+  .page-head {
+    margin-bottom: 2rem;
+    max-width: 44rem;
+  }
+  .page-title {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    letter-spacing: -0.04em;
+    margin: 0 0 1rem;
+    line-height: 1.05;
+  }
+  .lead {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .reading h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+  }
+  .steps {
+    margin: 0 0 1.75rem;
+    padding-left: 1.2rem;
+    display: grid;
+    gap: 0.75rem;
+    max-width: none;
+  }
+  .steps li {
+    line-height: 1.55;
+    color: rgba(245, 245, 242, 0.9);
+  }
+  .steps a {
+    color: var(--color-heat);
+    font-weight: 600;
+    word-break: break-all;
+  }
+  .tip {
+    margin: 0 0 1.75rem;
+    padding: 1.15rem 1.2rem;
+    background: rgba(0, 0, 0, 0.35);
+    border-left: 3px solid var(--color-heat);
+  }
+  .tip h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.2rem;
+  }
+  .tip p {
+    margin: 0;
+    line-height: 1.55;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .links a {
+    text-decoration: none;
+  }
+  .next-steps {
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(245, 245, 242, 0.12);
+  }
+  .next-steps h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+  }
+  .next-steps ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .next-steps a,
+  .share-btn {
+    color: var(--color-heat);
+    font-weight: 600;
+  }
+  .share-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+</style>

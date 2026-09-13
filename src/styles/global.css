@@ -82,8 +82,8 @@ a {
   gap: 0.5rem;
   padding: 0.85rem 1.4rem;
   background: var(--color-heat);
-  color: #fff;
-  font-weight: 600;
+  color: #111;
+  font-weight: 700;
   text-decoration: none;
   border: 0;
   transition: transform 0.2s ease, filter 0.2s ease;
@@ -109,6 +109,69 @@ a {
 .btn-secondary:hover {
   border-color: var(--color-snow);
   background: rgba(255, 255, 255, 0.04);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-heat);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--page-gutter);
+  top: 0.75rem;
+  z-index: 100;
+  padding: 0.65rem 0.9rem;
+  background: var(--color-heat);
+  color: #111;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+main {
+  padding-bottom: 5.5rem;
+}
+
+@media (min-width: 820px) {
+  main {
+    padding-bottom: 0;
+  }
+}
+
+.data-table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid rgba(245, 245, 242, 0.12);
+}
+
+.data-table th {
+  color: var(--color-mute);
+  font-weight: 600;
+}
+
+.cite {
+  font-size: 0.78em;
+  vertical-align: super;
+  color: var(--color-heat);
+  text-decoration: none;
+  margin-left: 0.15rem;
 }
 
 .mega-stat {
