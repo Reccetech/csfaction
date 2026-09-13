@@ -49,9 +49,9 @@ export const home = {
     ask: {
       title: 'Ce que nous demandons',
       items: [
-        'Arrêter de payer les frais juridiques à même le fonds d’exploitation. Si le CSF veut poursuivre le combat en cour, qu’il trouve un financement extérieur.',
-        'Remettre ces dollars aux élèves d’aujourd’hui : instruction, services, écoles existantes.',
-        'Fournir une présentation publique en ligne — avec la participation de Juristes Power Law — sur l’historique du dossier, où est allé l’argent, pourquoi le combat continue, et quels en sont les objectifs.',
+        'Prioriser la médiation et une négociation de bonne foi avec la Province et le VSB pour résoudre les appels en cours — sites, échéanciers et coûts — plutôt qu’une nouvelle ronde coûteuse en cour payée par le fonds d’exploitation. Si le CSF choisit quand même de litiger, qu’il le finance hors du budget d’exploitation.',
+        'Remettre ces dollars aux élèves d’aujourd’hui : instruction, services aux élèves et écoles existantes.',
+        'Tenir une séance d’information publique en ligne — avec la participation de Juristes Power Law — sur l’historique du dossier, où est allé l’argent, pourquoi le combat continue, et à quoi ressemble le succès maintenant.',
         'Publier un plan clair pour rembourser le déficit de 3,4 M$ approuvé par le ministère d’ici 2028 — un déficit que les conseils ne peuvent normalement pas porter.',
       ],
     },
@@ -63,11 +63,11 @@ export const home = {
       },
       {
         q: 'Que demandez-vous exactement ?',
-        a: 'Arrêter de financer les litiges ouverts avec le fonds d’exploitation; remettre l’argent en classe; une présentation publique en ligne avec Juristes Power; et un plan clair pour rembourser le déficit d’ici 2028. Si le CSF veut continuer en cour, qu’il trouve un financement extérieur.',
+        a: 'Prioriser la médiation et la négociation avec la Province et le VSB; remettre l’argent en classe; une séance publique en ligne avec Juristes Power; et un plan clair pour rembourser le déficit d’ici 2028. Si le CSF continue en cour, qu’il trouve un financement hors exploitation.',
       },
       {
         q: 'L’appel n’est-il pas nécessaire ?',
-        a: 'Des droits importants ont déjà été reconnus. Les retours diminuent pendant que les factures montent — et le ministère exige un remboursement du déficit d’ici 2028.',
+        a: 'Des droits importants ont déjà été reconnus. Les retours diminuent pendant que les factures montent — et le ministère exige un remboursement du déficit d’ici 2028. La médiation et la négociation restent des voies ouvertes.',
       },
       {
         q: 'Qui gère ce site ?',
@@ -130,9 +130,9 @@ export const home = {
     ask: {
       title: 'What we are asking for',
       items: [
-        'Stop paying legal fees from the operating budget. If CSF wants to continue the legal fight, find outside funding.',
-        'Put those dollars back into today’s students: instruction, services, existing schools.',
-        'Provide a public online presentation — with Juristes Power Law participating — on the history of the case, where the money has gone, why the fight continues, and what the goals are.',
+        'Prioritize mediation and good-faith negotiation with the Province and VSB to resolve the live appeals — on sites, timelines, and costs — instead of another costly courtroom round paid from the operating budget. If CSF still chooses to litigate, fund it from outside operating dollars.',
+        'Put those dollars back into today’s students: instruction, student services, and existing schools.',
+        'Hold a public online briefing — with Juristes Power Law participating — on the case history, where the money went, why the fight continues, and what success looks like now.',
         'Publish a clear plan to retire the ministry-approved $3.4M deficit by 2028 — a deficit boards are not normally allowed to carry.',
       ],
     },
@@ -144,11 +144,11 @@ export const home = {
       },
       {
         q: 'What exactly are you asking for?',
-        a: 'Stop funding open-ended litigation from the operating budget; put the money back into classrooms; a public online presentation with Juristes Power; and a clear plan to retire the deficit by 2028. If CSF continues in court, find outside funding.',
+        a: 'Prioritize mediation and negotiation with the Province and VSB; put the money back into classrooms; a public online briefing with Juristes Power; and a clear plan to retire the deficit by 2028. If CSF continues in court, fund it outside the operating budget.',
       },
       {
         q: 'Isn’t the appeal necessary?',
-        a: 'Major rights have already been recognized. Returns are diminishing while bills rise — and the Ministry requires deficit retirement by 2028.',
+        a: 'Major rights have already been recognized. Returns are diminishing while bills rise — and the Ministry requires deficit retirement by 2028. Mediation and negotiation remain open paths.',
       },
       {
         q: 'Who runs this site?',
