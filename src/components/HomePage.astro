@@ -48,18 +48,16 @@ const sourceAnchors =
   </section>
 
   <section class="hero">
-    <div class="hero-media" aria-hidden="true">
+    <div class="hero-media hero-media-poster" aria-hidden="true" data-hero-media>
       <video
         class="hero-video"
-        autoplay
         muted
         loop
         playsinline
+        preload="none"
         poster="/images/hero-poster.jpg"
         data-hero-video
-      >
-        <source src="/video/courtroom.mp4" type="video/mp4" />
-      </video>
+      ></video>
       <div class="hero-veil"></div>
     </div>
     <div class="container-page hero-content">
@@ -72,6 +70,9 @@ const sourceAnchors =
       <div class="cta-row rise-in rise-in-delay-3">
         <a class="btn-primary" href={ctaPaths.hub}>{cta.bannerCta}</a>
         <a class="btn-secondary" href={lang === 'fr' ? '/frais-juridiques' : '/en/legal-fees'}>{nav.evidence}</a>
+        <button class="btn-secondary hero-video-btn" type="button" data-hero-play hidden>
+          {lang === 'fr' ? 'Lire la vidéo d’ambiance' : 'Play background video'}
+        </button>
       </div>
     </div>
     <div class="hero-bars rise-in rise-in-delay-3">
@@ -89,6 +90,15 @@ const sourceAnchors =
       {
         t.stats.map((stat, i) => (
           <article class:list={['stat', `stat-${stat.icon}`]}>
+            <p class:list={['claim-tag', `claim-${stat.kind}`]}>
+              {stat.kind === 'calculation'
+                ? lang === 'fr'
+                  ? 'Calcul'
+                  : 'Calculation'
+                : lang === 'fr'
+                  ? 'Fait'
+                  : 'Fact'}
+            </p>
             <div class="stat-top">
               <StatIcon kind={stat.icon} />
               <div class="mega-stat heat">{stat.value}</div>
@@ -111,6 +121,7 @@ const sourceAnchors =
       <a class="text-link photo-cta" href={lang === 'fr' ? '/frais-juridiques' : '/en/legal-fees'}>
         {t.photoCta} →
       </a>
+      <p class="media-disclaimer">{t.mediaDisclaimer}</p>
     </div>
   </section>
 
@@ -141,6 +152,7 @@ const sourceAnchors =
     <div class="container-page">
       <div class="reading">
         <h2 class="font-display">{t.ask.title}</h2>
+        <p class="claim-tag claim-ask">{lang === 'fr' ? 'Nos demandes' : 'Our ask'}</p>
         <ol class="ask-list">
           {
             t.ask.items.map((item, i) => (
@@ -186,23 +198,41 @@ const sourceAnchors =
 
 <script>
   const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
-  if (video) {
-    const mq = window.matchMedia('(max-width: 819px)');
+  const media = document.querySelector<HTMLElement>('[data-hero-media]');
+  const playBtn = document.querySelector<HTMLButtonElement>('[data-hero-play]');
+  if (video && media && playBtn) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const desktop = window.matchMedia('(min-width: 820px)');
     const sync = () => {
-      if (mq.matches) {
-        video.removeAttribute('autoplay');
+      if (reduce || !desktop.matches) {
+        playBtn.hidden = true;
         video.pause();
         video.removeAttribute('src');
         video.load();
-        video.style.display = 'none';
-        const media = video.parentElement;
-        if (media) {
-          media.classList.add('hero-media-poster');
-        }
+        media.classList.add('hero-media-poster');
+        return;
       }
+      playBtn.hidden = false;
+      media.classList.add('hero-media-poster');
     };
+    playBtn.addEventListener('click', async () => {
+      if (!video.getAttribute('src') && !video.querySelector('source')) {
+        const source = document.createElement('source');
+        source.src = '/video/courtroom.mp4';
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        video.load();
+      }
+      media.classList.remove('hero-media-poster');
+      try {
+        await video.play();
+        playBtn.hidden = true;
+      } catch {
+        media.classList.add('hero-media-poster');
+      }
+    });
     sync();
-    mq.addEventListener('change', sync);
+    desktop.addEventListener('change', sync);
   }
 </script>
 
@@ -337,6 +367,29 @@ const sourceAnchors =
     border-top: 3px solid var(--color-heat);
     min-height: 100%;
   }
+  .claim-tag {
+    display: inline-block;
+    margin: 0 0 0.65rem;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid rgba(245, 245, 242, 0.25);
+    color: var(--color-mute);
+  }
+  .claim-fact {
+    border-color: rgba(61, 154, 106, 0.55);
+    color: #7dcea0;
+  }
+  .claim-calculation {
+    border-color: rgba(120, 170, 220, 0.55);
+    color: #9ec5e8;
+  }
+  .claim-ask {
+    border-color: rgba(253, 62, 18, 0.55);
+    color: var(--color-heat);
+  }
   .stat-top {
     display: flex;
     align-items: center;
@@ -424,6 +477,15 @@ const sourceAnchors =
   .photo-cta:hover {
     color: #e8dcc8;
     border-bottom-color: #e8dcc8;
+  }
+  .media-disclaimer {
+    margin: 1rem 0 0;
+    max-width: 36rem;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: rgba(245, 245, 242, 0.7);
+    font-weight: 400;
+    text-shadow: none;
   }
   .text-link {
     display: inline-block;

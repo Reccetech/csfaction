@@ -24,7 +24,7 @@ export const electionRegions: Region[] = [
   { id: 'nord', fr: 'Région du Nord', en: 'North Region' },
 ];
 
-/** Public contacts from CSF candidate biographies (Sept 2026). Not an endorsement. */
+/** Public contacts from CSF candidate biographies. Not an endorsement. */
 export const candidates: Candidate[] = [
   {
     id: 'dominique-dionne-simard',
@@ -71,7 +71,7 @@ export const candidates: Candidate[] = [
   {
     id: 'billy-quesnel',
     name: 'Billy Quesnel',
-    regionId: 'cote-sud',
+    regionId: 'vallee-fraser',
     email: 'billyquesnel@gmail.com',
     phone: '604-763-5329',
   },
@@ -81,6 +81,13 @@ export const candidates: Candidate[] = [
     regionId: 'vallee-fraser',
     email: 'etudechf@hotmail.com',
     phone: '778-928-1610',
+  },
+  {
+    id: 'abdel-tahir',
+    name: 'Abdel Tahir',
+    regionId: 'vallee-fraser',
+    email: '',
+    withdrawn: true,
   },
   {
     id: 'gaetan-desrochers',
@@ -116,11 +123,82 @@ export const candidates: Candidate[] = [
   },
 ];
 
+export const activeCandidates = candidates.filter((c) => !c.withdrawn && c.email);
+
 export const electionMeta = {
   candidatesUrl: 'https://www.csf.bc.ca/conseil-dadministration/elections-scolaires/candidats/',
+  electionsUrl: 'https://www.csf.bc.ca/conseil-dadministration/elections-scolaires/',
+  electionsUrlEn: 'https://www.csf.bc.ca/en/board-of-directors/school-trustee-elections-2026/',
   electionsEmail: 'elections@csf.bc.ca',
+  /** ISO timestamps in America/Vancouver — voting noon Sep 16 to 8pm Oct 17, 2026. */
+  votingOpensAt: '2026-09-16T12:00:00-07:00',
+  votingClosesAt: '2026-10-17T20:00:00-07:00',
   ballotInstructionsDateFr: '16 septembre 2026',
   ballotInstructionsDateEn: 'September 16, 2026',
   voteDeadlineFr: '17 octobre 2026 à 20 h (heure du Pacifique)',
   voteDeadlineEn: 'October 17, 2026 at 8:00 p.m. Pacific Time',
+  lastVerified: '2026-09-13',
+  lastVerifiedFr: '13 septembre 2026',
+  lastVerifiedEn: 'September 13, 2026',
 } as const;
+
+export type ElectionPhase = 'before' | 'open' | 'closed';
+
+export function getElectionPhase(now = new Date()): ElectionPhase {
+  const opens = new Date(electionMeta.votingOpensAt).getTime();
+  const closes = new Date(electionMeta.votingClosesAt).getTime();
+  const t = now.getTime();
+  if (t < opens) return 'before';
+  if (t > closes) return 'closed';
+  return 'open';
+}
+
+export function electionStatusCopy(lang: 'fr' | 'en', now = new Date()) {
+  const phase = getElectionPhase(now);
+  if (lang === 'fr') {
+    if (phase === 'before') {
+      return {
+        phase,
+        short: 'Le vote ouvre le 16 septembre 2026.',
+        hubLead:
+          'Le vote aux élections scolaires du CSF ouvre le 16 septembre 2026. Deux gestes concrets : écrire aux candidat·e·s de votre région pour leur faire part de vos préoccupations, puis voter pour celles et ceux qui partagent vos priorités.',
+      };
+    }
+    if (phase === 'closed') {
+      return {
+        phase,
+        short: 'Le vote est terminé.',
+        hubLead:
+          'Le vote aux élections scolaires CSF 2026 est terminé. Vous pouvez encore consulter les biographies et écrire aux élu·e·s selon les canaux publics disponibles.',
+      };
+    }
+    return {
+      phase,
+      short: 'Le vote est ouvert.',
+      hubLead:
+        'Les élections scolaires du CSF sont en cours. Deux gestes concrets : écrire aux candidat·e·s de votre région pour leur faire part de vos préoccupations, puis voter pour celles et ceux qui partagent vos priorités.',
+    };
+  }
+  if (phase === 'before') {
+    return {
+      phase,
+      short: 'Voting opens September 16, 2026.',
+      hubLead:
+        'CSF school board voting opens September 16, 2026. Two concrete steps: email the candidates in your region with your concerns, then vote for those who share your priorities.',
+    };
+  }
+  if (phase === 'closed') {
+    return {
+      phase,
+      short: 'Voting has closed.',
+      hubLead:
+        'CSF school board voting for 2026 has closed. You can still review candidate biographies and use public channels to contact trustees.',
+    };
+  }
+  return {
+    phase,
+    short: 'Voting is open.',
+    hubLead:
+      'CSF school board elections are underway. Two concrete steps: email the candidates in your region with your concerns, then vote for those who share your priorities.',
+  };
+}

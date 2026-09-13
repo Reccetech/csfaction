@@ -31,6 +31,7 @@ const closeLabel = lang === 'fr' ? 'Fermer' : 'Close';
           <a
             href={link.href}
             class:list={['nav-link', { active: path === link.href || (link.href !== r.home && path.startsWith(link.href)) }]}
+            aria-current={path === link.href || (link.href !== r.home && path.startsWith(link.href)) ? 'page' : undefined}
           >
             {link.label}
           </a>
@@ -60,6 +61,7 @@ const closeLabel = lang === 'fr' ? 'Fermer' : 'Close';
           <a
             href={link.href}
             class:list={['mobile-link', { active: path === link.href || (link.href !== r.home && path.startsWith(link.href)) }]}
+            aria-current={path === link.href || (link.href !== r.home && path.startsWith(link.href)) ? 'page' : undefined}
           >
             {link.label}
           </a>
@@ -88,7 +90,12 @@ const closeLabel = lang === 'fr' ? 'Fermer' : 'Close';
       toggle.addEventListener('click', () => {
         const open = toggle.getAttribute('aria-expanded') !== 'true';
         setOpen(open);
-        if (open) toggle.focus();
+        if (open) {
+          const first = panel.querySelector('a');
+          if (first instanceof HTMLElement) first.focus();
+        } else {
+          toggle.focus();
+        }
       });
 
       document.addEventListener('keydown', (event) => {

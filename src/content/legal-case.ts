@@ -9,6 +9,7 @@ export type CaseAppeal = {
   title: string;
   statusTitle: string;
   statusItems: string[];
+  lastVerified: string;
   timeline: TimelineItem[];
   partnersTitle: string;
   partners: string[];
@@ -50,7 +51,10 @@ export const legalCaseDeep = {
   fr: {
     oneMinuteTitle: 'En une minute',
     oneMinuteBody:
-      'Depuis 2010, le CSF poursuit la Province sous l’article 23 de la Charte pour sous-financement et installations inadéquates. La vague A a fait reconnaître des manquements et a produit des déclarations et dommages importants (CSC 2020), mais pas le programme de construction d’environ 300 M$ demandé. La vague B (exécution) a donné des résultats mitigés en mai 2025. Le CSF, la Province et le VSB ont ensuite formé des appels et appels incidents; début 2026, la Cour d’appel a limité le mémoire du CSF à 60 pages, et les dates d’audience ne sont pas encore confirmées publiquement.',
+      'Les droits linguistiques du CSF sont réels. Depuis 2010, le conseil poursuit la Province sous l’article 23 de la Charte pour sous-financement et installations inadéquates. La vague A a fait reconnaître des manquements et a produit des déclarations et dommages importants (CSC 2020) — mais pas les remèdes en installations estimés à des centaines de millions qu’il demandait. La vague B (exécution) a donné des résultats mitigés en mai 2025. Le CSF, la Province et le VSB ont formé des appels; les dates d’audience ne sont pas encore confirmées publiquement.',
+    whatCsfSaysTitle: 'Ce que dit le CSF',
+    whatCsfSaysBody:
+      'Le CSF a raison de souligner que les droits sous l’article 23 sont réels et que les tribunaux ont déjà reconnu des manquements importants. Notre désaccord porte sur la stratégie : financer la poursuite d’appels et de remèdes plus larges à même le fonds d’exploitation des élèves.',
     glossaryTitle: 'Petit glossaire',
     glossary: [
       {
@@ -97,7 +101,7 @@ export const legalCaseDeep = {
         summary: [
           'Depuis le 3 juin 2010, le CSF (avec la Fédération des parents francophones et des ayants droit) a poursuivi la Province pour sous-financement et installations inadéquates sous l’article 23. Le procès Russell a duré environ 238 jours d’audience; le jugement 2016 BCSC 1764 est daté du 26 septembre 2016.',
           'En appel (25 juillet 2018), la Cour d’appel a rejeté l’axe principal des demandeurs sur un mégaprogramme de construction en capital. Le 12 juin 2020, la Cour suprême du Canada (2020 CSC 13) a élargi des déclarations et restauré certains dommages — une victoire juridique réelle, mais technique.',
-          'Le CSF cherchait surtout un programme de construction d’environ 300 M$ ordonné par la cour — un ordre de grandeur comparable au budget annuel de capital scolaire de toute la province. Cette théorie a échoué. Gagner sur le droit n’équivaut pas à recevoir le chéquier de capital : les écoles passent encore par le processus budgétaire provincial.',
+          'Le CSF cherchait surtout des remèdes en installations estimés à des centaines de millions — un ordre de grandeur comparable au budget annuel de capital scolaire de toute la province. Cette théorie a échoué. Gagner sur le droit n’équivaut pas à recevoir le chéquier de capital : les écoles passent encore par le processus budgétaire provincial.',
         ],
         achievedTitle: 'Obtenu',
         achieved: [
@@ -107,7 +111,7 @@ export const legalCaseDeep = {
         ],
         notAchievedTitle: 'Non obtenu',
         notAchieved: [
-          'Pas de programme de construction en capital d’environ 300 M$ ordonné par la cour — l’objectif maximaliste principal.',
+          'Pas de remèdes en installations estimés à des centaines de millions — l’objectif principal de la vague A.',
           'Pas d’ordonnance du type « construisez toutes ces écoles maintenant, à ce prix ».',
           'Pas de chéquier de capital illimité : le financement des bâtiments reste soumis aux plans de capital, priorités et enveloppes provinciales.',
         ],
@@ -164,6 +168,7 @@ export const legalCaseDeep = {
             'Dates d’audience non encore confirmées dans les reportages publics.',
             'Expropriation : en mai 2025, la cour a ordonné à la Province de légiférer; le projet de loi 27 (2025) prévoit des modifications à la School Act étendant le pouvoir d’expropriation à l’autorité scolaire francophone, sous réserve d’approbation ministérielle.',
           ],
+          lastVerified: '13 septembre 2026',
           timeline: [
             { label: 'Dépôt de l’appel CSF', date: 'juin 2025 (signalé publiquement le 26 juin 2025)' },
             { label: 'Appel incident VSB', date: '8 juillet 2025 (notamment Laurier)' },
@@ -196,12 +201,12 @@ export const legalCaseDeep = {
             'Contester les limites du jugement de mai 2025 — notamment le refus de supervision judiciaire continue, le bail de 99 ans jugé suffisant pour Queen Elizabeth Annex, et l’absence d’ordonnance immédiate pour A.R. Lord.',
             'Préserver et renforcer les gains déjà obtenus (expropriation, obligations de négociation / sites, devoir de pondération du VSB) face aux appels de la Province et du VSB.',
           ],
-          chancesTitle: 'Notre évaluation (nous ne sommes pas avocats)',
+          chancesTitle: 'Ce qui reste en litige',
           chances: [
-            'Le jugement de mai 2025 était déjà un succès partiel : élargir fortement les remèdes en appel est une pente raide.',
-            'La Cour d’appel intervient peu sur les remèdes discrétionnaires et les conclusions de fait — surtout la responsabilité partagée des retards et le refus de supervision continue.',
-            'La Province et le VSB appellent aussi : le CSF peut perdre du terrain sur des gains déjà obtenus, pas seulement en gagner.',
-            'Des gains étroits restent possibles; un renversement maximal (pleine propriété partout, supervision continue, transferts immédiats) semble peu probable.',
+            'Le CSF cherche en appel des remèdes d’exécution plus larges que le jugement de mai 2025 (sites, transferts, supervision).',
+            'La Province et le VSB appellent aussi certains aspects du jugement, y compris le pouvoir d’expropriation.',
+            'Le procès a ordonné des démarches concrètes sur certains sites et une loi sur l’expropriation — pas une supervision judiciaire continue ni tous les transferts demandés.',
+            'Les dates d’audience en Cour d’appel ne sont pas encore confirmées dans les reportages publics.',
           ],
         },
         refs: [
@@ -266,7 +271,10 @@ export const legalCaseDeep = {
   en: {
     oneMinuteTitle: 'In one minute',
     oneMinuteBody:
-      'Since 2010, CSF has sued the Province under Charter section 23 over underfunding and inadequate French-language facilities. Wave A secured recognition of breaches plus important declarations and damages (SCC 2020), but not the ~$300M court-ordered build program sought. Wave B (enforcement) produced mixed results in May 2025. CSF, the Province, and VSB then filed appeals and cross-appeals; in early 2026 the Court of Appeal limited CSF’s factum to 60 pages, and hearing dates are not yet confirmed in public reporting.',
+      'CSF’s language rights are real. Since 2010, the board has sued the Province under Charter section 23 over underfunding and inadequate French-language facilities. Wave A secured recognition of breaches plus important declarations and damages (SCC 2020) — but not the facilities remedies estimated in the hundreds of millions that CSF sought. Wave B (enforcement) produced mixed results in May 2025. CSF, the Province, and VSB have filed appeals; hearing dates are not yet confirmed in public reporting.',
+    whatCsfSaysTitle: 'What CSF says',
+    whatCsfSaysBody:
+      'CSF is right that section 23 rights are real and that courts have already recognized important breaches. Our disagreement is about strategy: funding continued appeals and broader remedies from the student operating fund.',
     glossaryTitle: 'Quick glossary',
     glossary: [
       {
@@ -313,7 +321,7 @@ export const legalCaseDeep = {
         summary: [
           'From 3 June 2010, CSF (with the Fédération des parents francophones and rights-holder parents) sued the Province over underfunding and inadequate facilities under section 23. The Russell trial ran about 238 sitting days; judgment 2016 BCSC 1764 is dated 26 September 2016.',
           'On appeal (25 July 2018), the Court of Appeal rejected the plaintiffs’ main capital mega-build theory. On 12 June 2020, the Supreme Court of Canada (2020 SCC 13) broadened declarations and restored certain damages — a real legal win, but a technical one.',
-          'CSF had mainly been fighting for a court-ordered capital build package on the order of ~$300M — a scale compared to the Province’s entire annual education capital budget. That theory failed. Winning on the law is not the same as getting the capital chequebook: schools still go through the provincial budget process.',
+          'CSF had mainly been fighting for facilities remedies estimated in the hundreds of millions — a scale compared to the Province’s entire annual education capital budget. That theory failed. Winning on the law is not the same as getting the capital chequebook: schools still go through the provincial budget process.',
         ],
         achievedTitle: 'Achieved',
         achieved: [
@@ -323,7 +331,7 @@ export const legalCaseDeep = {
         ],
         notAchievedTitle: 'Not achieved',
         notAchieved: [
-          'No court-ordered ~$300M capital build program — the main maximalist ask.',
+          'No facilities remedies estimated in the hundreds of millions — Wave A’s main ask.',
           'No order of the form “build all of these schools now, at that price.”',
           'No unlimited capital chequebook: school buildings still depend on provincial capital plans, priorities, and envelopes.',
         ],
@@ -380,6 +388,7 @@ export const legalCaseDeep = {
             'Hearing dates not yet confirmed in public reporting.',
             'Expropriation: in May 2025 the court ordered the Province to legislate; Bill 27 (2025) amendments provide for extending expropriation authority to the francophone education authority, subject to ministerial approval.',
           ],
+          lastVerified: 'September 13, 2026',
           timeline: [
             { label: 'CSF appeal filed', date: 'June 2025 (publicly reported 26 June 2025)' },
             { label: 'VSB cross-appeal', date: '8 July 2025 (including Laurier)' },
@@ -412,12 +421,12 @@ export const legalCaseDeep = {
             'Challenge limits in the May 2025 judgment — including the refusal of ongoing court supervision, the finding that a 99-year lease was enough for Queen Elizabeth Annex, and the lack of an immediate A.R. Lord transfer order.',
             'Preserve and strengthen remedies already won (expropriation, negotiation / site obligations, VSB balancing duty) against the Province’s and VSB’s appeals.',
           ],
-          chancesTitle: 'Our assessment (we are not lawyers)',
+          chancesTitle: 'What remains unresolved',
           chances: [
-            'The May 2025 judgment was already a partial win: sharply expanding remedies on appeal is an uphill climb.',
-            'Appeal courts rarely rebuild discretionary remedies or fact findings — especially shared blame for delay and the refusal of ongoing court supervision.',
-            'The Province and VSB also appealed: CSF can lose ground on remedies already won, not only gain more.',
-            'Narrow wins remain possible; a maximal rematch (freehold everywhere, ongoing supervision, immediate transfers) seems unlikely.',
+            'CSF seeks broader enforcement remedies on appeal than the May 2025 judgment (sites, transfers, supervision).',
+            'The Province and VSB are also appealing aspects of the judgment, including expropriation powers.',
+            'The trial ordered concrete next steps on certain sites and expropriation legislation — not ongoing court supervision or every transfer CSF sought.',
+            'Court of Appeal hearing dates are not yet confirmed in public reporting.',
           ],
         },
         refs: [

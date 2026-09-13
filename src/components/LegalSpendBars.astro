@@ -38,6 +38,24 @@ const accessibleSummary = [
       })
     }
   </div>
+  <ul class="bars-list" aria-hidden="true">
+    {
+      legalSpendSeries.map((d) => {
+        const width = Math.max(8, Math.round((d.amount / max) * 100));
+        return (
+          <li>
+            <div class="list-meta">
+              <span class="list-year">{d.year}</span>
+              <span class="list-value">{formatCadFull(d.amount, lang)}</span>
+            </div>
+            <div class="list-track">
+              <div class="list-fill" style={`width:${width}%`}></div>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
   <div class="bars-chrome">
     <p class="total">
       <span>{totalLabel}</span>
@@ -102,6 +120,10 @@ const accessibleSummary = [
     min-height: clamp(260px, 48vh, 520px);
   }
 
+  .bars-list {
+    display: none;
+  }
+
   .bars-bleed .bars {
     padding-inline: clamp(1rem, 4vw, 3rem);
   }
@@ -164,8 +186,37 @@ const accessibleSummary = [
   }
 
   @media (max-width: 640px) {
-    .year {
-      font-size: 0.65rem;
+    .bars {
+      display: none;
+    }
+    .bars-list {
+      list-style: none;
+      margin: 0;
+      padding: 0 1rem;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .list-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+    }
+    .list-year {
+      color: var(--color-mute);
+    }
+    .list-value {
+      font-weight: 700;
+      color: var(--color-snow);
+    }
+    .list-track {
+      height: 0.65rem;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .list-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-ember), var(--color-heat));
     }
   }
 </style>

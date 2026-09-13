@@ -46,6 +46,10 @@ const pageRefs = (() => {
             <h2 id="one-minute-heading" class="one-minute-title">{caseDeep.oneMinuteTitle}</h2>
             <p class="one-minute-body">{caseDeep.oneMinuteBody}</p>
           </aside>
+          <aside class="what-csf-says" aria-labelledby="what-csf-says-heading">
+            <h2 id="what-csf-says-heading" class="one-minute-title">{caseDeep.whatCsfSaysTitle}</h2>
+            <p class="one-minute-body">{caseDeep.whatCsfSaysBody}</p>
+          </aside>
         </div>
       </div>
     </header>
@@ -196,6 +200,10 @@ const pageRefs = (() => {
                             <li>{item}</li>
                           ))}
                         </ul>
+                        <p class="status-verified">
+                          {lang === 'fr' ? 'Dernière vérification :' : 'Last verified:'}{' '}
+                          {wave.appeal.lastVerified}
+                        </p>
                       </aside>
                       <dl class="wave-timeline">
                         {wave.appeal.timeline.map((item) => (
@@ -225,7 +233,7 @@ const pageRefs = (() => {
                             ))}
                           </ul>
                         </section>
-                        <section class="wave-panel assessment-panel" aria-label={wave.appeal.chancesTitle}>
+                        <section class="wave-panel unresolved-panel" aria-label={wave.appeal.chancesTitle}>
                           <h5 class="font-display panel-h">{wave.appeal.chancesTitle}</h5>
                           <ul>
                             {wave.appeal.chances.map((item) => (
@@ -310,13 +318,17 @@ const pageRefs = (() => {
     margin: 0;
     color: rgba(245, 245, 242, 0.9);
   }
-  .one-minute {
+  .one-minute,
+  .what-csf-says {
     margin-top: 1.5rem;
     max-width: 42rem;
     padding: 1.15rem 1.1rem;
     background: rgba(0, 0, 0, 0.28);
     border: 1px solid rgba(245, 245, 242, 0.12);
     border-left: 3px solid rgba(245, 245, 242, 0.45);
+  }
+  .what-csf-says {
+    border-left-color: rgba(61, 154, 106, 0.7);
   }
   .one-minute-title {
     margin: 0 0 0.55rem;
@@ -602,6 +614,12 @@ const pageRefs = (() => {
     font-size: 0.98rem;
     color: rgba(245, 245, 242, 0.9);
   }
+  .status-verified {
+    margin: 0.85rem 0 0;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--color-mute);
+  }
   .partner-highlight {
     background: linear-gradient(135deg, rgba(196, 163, 90, 0.22), rgba(196, 163, 90, 0.08));
     border: 1px solid rgba(196, 163, 90, 0.45);
@@ -614,16 +632,16 @@ const pageRefs = (() => {
   .outcome.goals {
     border-left: 3px solid rgba(245, 245, 242, 0.35);
   }
-  .assessment-panel {
-    background: linear-gradient(135deg, rgba(196, 163, 90, 0.14), rgba(0, 0, 0, 0.28));
-    border: 1px solid rgba(196, 163, 90, 0.35);
-    border-left: 4px solid #c4a35a;
+  .unresolved-panel {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(245, 245, 242, 0.12);
+    border-left: 4px solid rgba(245, 245, 242, 0.45);
   }
-  .assessment-panel .panel-h {
+  .unresolved-panel .panel-h {
     color: rgba(245, 245, 242, 0.95);
   }
   .outcome ul,
-  .assessment-panel ul {
+  .unresolved-panel ul {
     margin: 0;
     padding-left: 1.15rem;
     display: grid;

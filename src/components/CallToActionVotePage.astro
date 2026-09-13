@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { callToAction, callToActionPaths } from '../content/call-to-action';
-import { electionMeta } from '../content/candidates';
+import { electionMeta, electionStatusCopy } from '../content/candidates';
 import type { Lang } from '../content/ui';
 
 interface Props {
@@ -12,6 +12,8 @@ interface Props {
 const { lang, path } = Astro.props;
 const t = callToAction[lang];
 const paths = callToActionPaths[lang];
+const status = electionStatusCopy(lang);
+const electionsOfficialUrl = lang === 'fr' ? electionMeta.electionsUrl : electionMeta.electionsUrlEn;
 ---
 
 <Layout lang={lang} title={t.votePageTitle} description={t.votePageDescription} path={path}>
@@ -19,28 +21,40 @@ const paths = callToActionPaths[lang];
     <div class="container-page">
       <p class="back"><a href={paths.hub}>{t.backHub}</a></p>
       <header class="page-head">
+        <p class="status-pill">{status.short}</p>
         <h1 class="font-display page-title">{t.voteH1}</h1>
         <p class="lead">{t.voteLead}</p>
       </header>
 
       <div class="reading">
+        <aside class="eligibility" aria-labelledby="eligibility-heading">
+          <h2 id="eligibility-heading" class="font-display">{t.eligibilityTitle}</h2>
+          <p>{t.eligibilityIntro}</p>
+          <ul>
+            {t.eligibility.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="eligibility-note">{t.eligibilityNote}</p>
+          <p>
+            <a href={electionsOfficialUrl} target="_blank" rel="noopener noreferrer">
+              {t.eligibilityLink}
+              <span class="sr-only"> {t.opensInNewTab}</span>
+            </a>
+          </p>
+        </aside>
+
         <h2 class="font-display">{t.voteStepsTitle}</h2>
         <ol class="steps">
-          {t.voteSteps.map((step, i) => (
-            <li>
-              {i === 0 ? (
-                <>
-                  {step}{' '}
-                  <a href={electionMeta.candidatesUrl} target="_blank" rel="noopener noreferrer">
-                    {electionMeta.candidatesUrl}
-                  </a>
-                </>
-              ) : (
-                step
-              )}
-            </li>
-          ))}
+          <li>
+            {t.voteBiosStep}{' '}
+            <a href={electionMeta.candidatesUrl} target="_blank" rel="noopener noreferrer">
+              {t.candidatesLink}
+              <span class="sr-only"> {t.opensInNewTab}</span>
+            </a>
+          </li>
+          {t.voteSteps.map((step) => <li>{step}</li>)}
         </ol>
+
+        <p class="verified">{t.lastVerifiedLabel}</p>
 
         <div class="tip">
           <h3 class="font-display">{t.voteTipTitle}</h3>
@@ -50,6 +64,7 @@ const paths = callToActionPaths[lang];
         <div class="links">
           <a class="btn-primary" href={electionMeta.candidatesUrl} target="_blank" rel="noopener noreferrer">
             {t.candidatesLink}
+            <span class="sr-only"> {t.opensInNewTab}</span>
           </a>
           <a class="btn-secondary" href={`mailto:${electionMeta.electionsEmail}`}>{t.emailElections}</a>
           <a class="btn-secondary" href={paths.email}>{callToAction[lang].actionEmailCta}</a>
@@ -67,6 +82,7 @@ const paths = callToActionPaths[lang];
               </button>
             </li>
           </ul>
+          <p class="sr-only" aria-live="polite" data-live-status></p>
         </div>
       </div>
     </div>
@@ -75,6 +91,7 @@ const paths = callToActionPaths[lang];
 
 <script>
   const share = document.querySelector('[data-share-page]');
+  const live = document.querySelector('[data-live-status]');
   if (share instanceof HTMLButtonElement) {
     share.addEventListener('click', async () => {
       const url = window.location.href;
@@ -88,7 +105,9 @@ const paths = callToActionPaths[lang];
       }
       try {
         await navigator.clipboard.writeText(url);
-        share.textContent = share.textContent?.includes('Partager') ? 'Lien copié' : 'Link copied';
+        const msg = share.textContent?.includes('Partager') ? 'Lien copié' : 'Link copied';
+        share.textContent = msg;
+        if (live) live.textContent = msg;
       } catch {
         /* ignore */
       }
@@ -114,6 +133,14 @@ const paths = callToActionPaths[lang];
     margin-bottom: 2rem;
     max-width: 44rem;
   }
+  .status-pill {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-heat);
+  }
   .page-title {
     font-size: clamp(2.2rem, 6vw, 3.5rem);
     letter-spacing: -0.04em;
@@ -130,8 +157,35 @@ const paths = callToActionPaths[lang];
     margin: 0 0 1rem;
     font-size: clamp(1.35rem, 3vw, 1.75rem);
   }
-  .steps {
+  .eligibility {
     margin: 0 0 1.75rem;
+    padding: 1.15rem 1.2rem;
+    background: rgba(245, 245, 242, 0.05);
+    border: 1px solid rgba(245, 245, 242, 0.12);
+  }
+  .eligibility h2 {
+    margin: 0 0 0.65rem;
+  }
+  .eligibility p {
+    margin: 0 0 0.75rem;
+    line-height: 1.5;
+  }
+  .eligibility ul {
+    margin: 0 0 0.85rem;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .eligibility a {
+    color: var(--color-heat);
+    font-weight: 600;
+  }
+  .eligibility-note {
+    color: var(--color-mute);
+    font-size: 0.92rem;
+  }
+  .steps {
+    margin: 0 0 1rem;
     padding-left: 1.2rem;
     display: grid;
     gap: 0.75rem;
@@ -144,7 +198,11 @@ const paths = callToActionPaths[lang];
   .steps a {
     color: var(--color-heat);
     font-weight: 600;
-    word-break: break-all;
+  }
+  .verified {
+    margin: 0 0 1.75rem;
+    font-size: 0.9rem;
+    color: var(--color-mute);
   }
   .tip {
     margin: 0 0 1.75rem;
@@ -194,5 +252,16 @@ const paths = callToActionPaths[lang];
     padding: 0;
     font: inherit;
     cursor: pointer;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 </style>

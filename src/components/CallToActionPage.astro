@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { callToAction, callToActionPaths } from '../content/call-to-action';
+import { electionStatusCopy } from '../content/candidates';
 import type { Lang } from '../content/ui';
 
 interface Props {
@@ -11,14 +12,16 @@ interface Props {
 const { lang, path } = Astro.props;
 const t = callToAction[lang];
 const paths = callToActionPaths[lang];
+const status = electionStatusCopy(lang);
 ---
 
 <Layout lang={lang} title={t.hubTitle} description={t.hubDescription} path={path}>
   <section class="section cta-hub">
     <div class="container-page">
       <header class="page-head">
+        <p class="status-pill">{status.short}</p>
         <h1 class="font-display page-title">{t.hubH1}</h1>
-        <p class="lead">{t.hubLead}</p>
+        <p class="lead">{status.hubLead}</p>
       </header>
 
       <div class="actions">
@@ -44,6 +47,14 @@ const paths = callToActionPaths[lang];
   .page-head {
     margin-bottom: 2.25rem;
     max-width: 44rem;
+  }
+  .status-pill {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-heat);
   }
   .page-title {
     font-size: clamp(2.4rem, 7vw, 4rem);
@@ -78,15 +89,14 @@ const paths = callToActionPaths[lang];
   .action-card h2 {
     margin: 0;
     font-size: clamp(1.35rem, 3vw, 1.75rem);
-    letter-spacing: -0.03em;
   }
   .action-card p {
     margin: 0;
     line-height: 1.55;
     color: rgba(245, 245, 242, 0.88);
   }
-  .action-card .btn-primary {
-    justify-self: start;
+  .action-card a {
     text-decoration: none;
+    justify-self: start;
   }
 </style>

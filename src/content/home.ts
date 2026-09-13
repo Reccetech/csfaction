@@ -6,33 +6,37 @@ export const home = {
     description:
       'Parents du CSF : oui à l’éducation en français, non au financement des procès par l’argent des élèves.',
     heroEyebrow: 'Créé par des parents d’élèves du CSF',
-    heroLine1: 'Des dizaines de millions dépensés en cour.',
-    heroLine2: 'Moins d’argent pour les élèves.',
+    heroLine1: 'Des dizaines de millions en dépenses juridiques documentées.',
+    heroLine2: 'Les coûts juridiques du budget d’exploitation méritent un examen.',
     heroSupport:
-      'Nous soutenons l’expansion de l’éducation en français en C.-B. — mais des batailles juridiques sans fin ne doivent pas se faire au détriment des élèves d’aujourd’hui.',
+      'Nous soutenons l’expansion de l’éducation en français en C.-B. — mais la poursuite d’un litige majeur ne doit pas se faire au détriment des élèves d’aujourd’hui.',
     barsCaption: 'Paiements à Juristes Power Law — cinq derniers exercices¹',
     barsTotalLabel: 'Total sur cinq ans',
     stats: [
       {
         icon: 'up' as const,
+        kind: 'calculation' as const,
         value: '8,9 M$',
-        label: 'dépensés en batailles juridiques en 2024–25 seulement (~7,7 % du budget d’exploitation)',
+        label:
+          'versés à Juristes Power Law en 2024–25 (SOFI). ~7,7 % des dépenses d’exploitation — une comparaison d’échelle.',
       },
       {
         icon: 'down' as const,
+        kind: 'fact' as const,
         value: '−8,1 %',
         label: 'd’effectif au CSF de 2021–22 à 2025–26 (6 400 → 5 879)',
       },
       {
         icon: 'debt' as const,
+        kind: 'fact' as const,
         value: '3,4 M$ · 2028',
         label:
           'le déficit d’exploitation que le ministère exige d’éliminer d’ici le 30 juin 2028',
       },
     ],
     arcEnrol: {
-      title: 'L’effectif baisse dans les écoles existantes, pendant qu’on dépense des sommes énormes pour de nouvelles écoles.',
-      body: 'Le réseau perd des élèves chaque année. Il est difficile de justifier des millions en cour pour de nouvelles installations pendant que des écoles actuelles — comme Victor-Brodeur (−32 %) — prennent du retard.',
+      title: 'L’effectif baisse dans les écoles existantes — ce qui renforce, selon nous, le besoin de comparer coûts et bénéfices du litige.',
+      body: 'Fait : le réseau perd des élèves chaque année (p. ex. Victor-Brodeur −32 %). Notre point de vue : cela renforce l’importance de comparer publiquement les gains attendus d’un litige supplémentaire aux priorités de services aux élèves d’aujourd’hui. Nous n’affirmons pas que les frais juridiques ont causé la baisse d’effectif.',
       quote:
         'Mauvaise gestion des ressources financières, notamment le maintien de procédures judiciaires coûteuses au détriment des services aux élèves et du soutien au personnel.',
       quoteAttr: 'SEPF — lettre au ministère de l’Éducation, 8 octobre 2025',
@@ -44,7 +48,7 @@ export const home = {
     },
     who: {
       title: 'Qui sommes-nous',
-      body: 'Ce site a été créé par des parents d’élèves du CSF préoccupés par la situation. Nous ne sommes ni le conseil scolaire ni le ministère. Nous voulons des salles de classe fortes et un réseau francophone qui grandit — pas un budget d’exploitation vidé par des batailles juridiques sans fin.',
+      body: 'Ce site a été créé par des parents d’élèves du CSF préoccupés par la situation. Nous ne sommes ni le conseil scolaire ni le ministère. Nous voulons des salles de classe fortes et un réseau francophone qui grandit — pas un budget d’exploitation vidé par un litige majeur qui se poursuit.',
     },
     ask: {
       title: 'Ce que nous demandons',
@@ -76,8 +80,10 @@ export const home = {
     ],
     photoCaption: 'Les élèves et les écoles d’aujourd’hui d’abord…',
     photoHighlight:
-      'En 2024–25, les paiements juridiques (~8,9 M$) représentaient près de 28 % de la masse salariale enseignante — environ 1 $ en honoraires pour 4 $ versés aux enseignants.',
+      'Comparaison d’échelle : en 2024–25, les paiements juridiques (~8,9 M$) représentaient près de 28 % de la masse salariale enseignante — environ 1 $ en honoraires pour 4 $ versés aux enseignants. Ce n’est pas une affirmation que les salaires des enseignants ont été réduits de ce montant.',
     photoCta: 'Voir le dossier juridique et les coûts',
+    mediaDisclaimer:
+      'Les images de stock ou illustratives et les images de salle d’audience sur ce site ne montrent pas d’élèves, d’écoles ou de procédures du CSF, sauf indication contraire.',
     sourcesNote:
       'Chiffres clés ci-dessous et sur les pages liées. SOFI = paiements à « JURISTES POWER LAW ».',
   },
@@ -86,33 +92,37 @@ export const home = {
     description:
       'CSF parents: yes to French education, no to funding court fights with student operating dollars.',
     heroEyebrow: 'Created by parents of CSF students',
-    heroLine1: 'Tens of millions spent in court.',
-    heroLine2: 'Less money for students.',
+    heroLine1: 'Tens of millions in documented legal spending.',
+    heroLine2: 'Operating-budget legal costs need scrutiny.',
     heroSupport:
-      'We support expanding French-language education in B.C. — but never-ending legal fights must not come at the expense of today’s students.',
+      'We support expanding French-language education in B.C. — but continued major litigation must not come at the expense of today’s students.',
     barsCaption: 'Payments to Juristes Power Law — last five fiscal years¹',
     barsTotalLabel: 'Five-year total',
     stats: [
       {
         icon: 'up' as const,
+        kind: 'calculation' as const,
         value: '$8.9M',
-        label: 'spent on legal battles in 2024–25 alone (~7.7% of operating expenses)',
+        label:
+          'paid to Juristes Power Law in 2024–25 (SOFI). ~7.7% of operating expenses — a scale comparison.',
       },
       {
         icon: 'down' as const,
+        kind: 'fact' as const,
         value: '−8.1%',
         label: 'CSF enrolment from 2021–22 to 2025–26 (6,400 → 5,879)',
       },
       {
         icon: 'debt' as const,
+        kind: 'fact' as const,
         value: '$3.4M · 2028',
         label:
           'the operating deficit that the ministry requires to be cleared by June 30, 2028',
       },
     ],
     arcEnrol: {
-      title: 'Enrolment is falling at existing schools, while we spend huge amounts to fight for new schools.',
-      body: 'The district is losing students every year. It is hard to justify millions in court for new facilities while current schools — like Victor-Brodeur (−32%) — fall behind.',
+      title: 'Enrolment is falling at existing schools — which, in our view, strengthens the case for a public cost-benefit comparison of further litigation.',
+      body: 'Fact: the district is losing students each year (e.g. Victor-Brodeur −32%). Our view: that strengthens the case for publicly comparing expected gains from further litigation against current student-service priorities. We are not claiming legal spending caused the decline.',
       quote:
         'Mismanagement of financial resources, notably the continued funding of costly legal proceedings at the expense of essential student services and staff support.',
       quoteAttr: 'SEPF — letter to the Minister of Education, 8 October 2025',
@@ -125,7 +135,7 @@ export const home = {
     },
     who: {
       title: 'Who we are',
-      body: 'This site was created by concerned parents of CSF students. We are not the school board and not the Ministry. We want strong classrooms and a growing francophone network — not an operating budget drained by never-ending legal battles.',
+      body: 'This site was created by concerned parents of CSF students. We are not the school board and not the Ministry. We want strong classrooms and a growing francophone network — not an operating budget drained by continued major litigation.',
     },
     ask: {
       title: 'What we are asking for',
@@ -157,8 +167,10 @@ export const home = {
     ],
     photoCaption: 'Today’s students and schools should come first…',
     photoHighlight:
-      'In 2024–25, legal payments (~$8.9M) were nearly 28% of teacher salaries — roughly $1 in legal fees for every $4 paid to teachers.',
+      'Scale comparison: in 2024–25, legal payments (~$8.9M) were nearly 28% of teacher salaries — roughly $1 in legal fees for every $4 paid to teachers. This is not a claim that teacher salaries were cut by that amount.',
     photoCta: 'See the legal case and the costs',
+    mediaDisclaimer:
+      'Stock and illustrative images and courtroom footage on this site do not depict CSF students, schools, or proceedings unless explicitly stated.',
     sourcesNote:
       'Key figures below and on the linked pages. SOFI = payments to “JURISTES POWER LAW”.',
   },

@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:election": "node --experimental-strip-types --experimental-transform-types scripts/check-election-data.ts",
+    "ci": "npm run test:election && npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

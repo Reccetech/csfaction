@@ -1,10 +1,14 @@
 import type { Lang } from './ui';
 
+export type SourceType = 'primary' | 'official-statement' | 'news' | 'advocacy' | 'commentary';
+
 export type Source = {
   id: string;
   href: string;
   label: { fr: string; en: string };
   note?: { fr: string; en: string };
+  sourceType?: SourceType;
+  publisher?: string;
 };
 
 /** Canonical public sources cited across the site. */
@@ -20,6 +24,8 @@ export const sources = {
       fr: 'SOFI publics à partir de 2019–20; paiements fournisseurs > 25 000 $.',
       en: 'Public SOFIs from 2019–20 onward; suppliers paid over $25,000.',
     },
+    sourceType: 'primary',
+    publisher: 'CSF',
   },
   cbc2016: {
     id: 'cbc-2016',
@@ -28,6 +34,8 @@ export const sources = {
       fr: 'CBC News — verdict 2016 (~17 M$ déjà dépensés)',
       en: 'CBC News — 2016 verdict (nearly $17M already spent)',
     },
+    sourceType: 'news',
+    publisher: 'CBC',
   },
   radioCanadaWaveBCosts: {
     id: 'rc-wave-b-costs',
@@ -36,6 +44,8 @@ export const sources = {
       fr: 'Radio-Canada — coûts vague B (17,98 M$ CSF; procès prolongé)',
       en: 'Radio-Canada — Wave B costs ($17.98M CSF; trial prolonged)',
     },
+    sourceType: 'news',
+    publisher: 'Radio-Canada',
   },
   radioCanadaDeficit: {
     id: 'rc-deficit',
@@ -269,14 +279,14 @@ export const pageSourceIds = {
 export const estimateNotes = {
   fr: {
     lifetime:
-      'Estimation (pas une ligne SOFI unique) : ~17 M$ déjà dépensés au verdict 2016 (CBC) + paiements SOFI récents à Juristes Power et chiffre CSF vague B (17,98 M$). Le total « > 35 M$ » combine ces repères publics; il peut y avoir un léger chevauchement entre sources.',
+      'ESTIMATION (pas une ligne SOFI unique) : ~17 M$ déjà dépensés au verdict 2016 (CBC) + paiements SOFI récents à Juristes Power et chiffre CSF vague B (17,98 M$). Le total « > 35 M$ » combine ces repères publics; ne pas les additionner tels quels — il peut y avoir un chevauchement entre sources.',
     allParties:
-      'Estimation toutes parties : honoraires/défense CSF + ~9,35 M$ côté VSB (Radio-Canada) + coûts de la Province — ordre de grandeur > 40–45 M$, pas un audit consolidé.',
+      'ESTIMATION toutes parties : honoraires/défense CSF + ~9,35 M$ côté VSB (Radio-Canada) + coûts de la Province — ordre de grandeur > 40–45 M$, pas un audit consolidé. Ne pas additionner cette ligne au total CSF : elle inclut déjà des coûts CSF.',
   },
   en: {
     lifetime:
-      'Estimate (not a single SOFI line): nearly $17M already spent by the 2016 verdict (CBC) + recent SOFI payments to Juristes Power and CSF’s Wave B figure ($17.98M). The “>$35M” lifetime figure combines those public benchmarks; sources may slightly overlap.',
+      'ESTIMATE (not a single SOFI line): nearly $17M already spent by the 2016 verdict (CBC) + recent SOFI payments to Juristes Power and CSF’s Wave B figure ($17.98M). The “>$35M” lifetime figure combines those public benchmarks; do not add the rows as if they were separate — sources may overlap.',
     allParties:
-      'All-parties estimate: CSF counsel/defence costs + ~$9.35M on the VSB side (Radio-Canada) + Province defence — order of magnitude >$40–45M, not a consolidated audit.',
+      'ESTIMATE all parties: CSF counsel/defence costs + ~$9.35M on the VSB side (Radio-Canada) + Province defence — order of magnitude >$40–45M, not a consolidated audit. Do not add this row to the CSF total: it already includes CSF costs.',
   },
 } as const;

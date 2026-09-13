@@ -44,23 +44,23 @@ export const legal = {
   fr: {
     title: 'Dossier juridique — Élèves d’abord',
     description:
-      'Depuis 2010 : droits linguistiques, gains majeurs, puis une vague d’exécution coûteuse — plus de 35 M$ en honoraires côté CSF.',
+      'Depuis 2010 : droits linguistiques, gains majeurs, puis une vague d’exécution coûteuse — des dizaines de millions en dépenses juridiques documentées.',
     h1: 'État du dossier et frais juridiques',
-    lead: 'Les droits linguistiques comptent. Voici ce que le CSF a obtenu en cour — et pourquoi la voie judiciaire en cours pourrait coûter très cher pour des rendements décroissants.',
+    lead: 'Les droits linguistiques comptent. Voici ce que le CSF a obtenu en cour — et pourquoi poursuivre la voie judiciaire soulève des questions de coûts et de bénéfices pour les élèves d’aujourd’hui.',
 
     fightTitle: 'Ce pour quoi le CSF se battait',
     fightBody:
-      'Depuis juin 2010, le CSF (avec la Fédération des parents francophones et des ayants droit) poursuit la Province en vertu de l’article 23 de la Charte : financement insuffisant et installations inadéquates pour l’éducation en français en C.-B. La vague A visait des réformes systémiques, des installations dans environ 17 communautés, des dommages — et un programme de capital de l’ordre de ~300 M$ ordonné par la cour.',
+      'Depuis juin 2010, le CSF (avec la Fédération des parents francophones et des ayants droit) poursuit la Province en vertu de l’article 23 de la Charte : financement insuffisant et installations inadéquates pour l’éducation en français en C.-B. La vague A visait des réformes systémiques, des installations dans environ 17 communautés, des dommages — et des remèdes en installations estimés à des centaines de millions (pas un chèque ordonné par la cour à ce montant).',
     winsTitle: 'Faits saillants et résultats majeurs',
     wins: [
       '2016 (BCSC 1764) : succès partiel après un procès de 238 jours — pas le méga-programme de construction demandé.',
-      '2020 (CSC 13) : gain majeur — déclarations élargies sur les installations, 6 M$ en dommages de transport restaurés, 1,1 M$ (facteur rural AFG). Ce n’était pas une ordonnance de construire pour 300 M$.',
+      '2020 (CSC 13) : gain majeur — déclarations élargies sur les installations, 6 M$ en dommages de transport restaurés, 1,1 M$ (facteur rural AFG). Ce n’était pas une ordonnance de construire pour des centaines de millions.',
       'Les tribunaux ont aussi critiqué les « lettres de positionnement » adversariales du CSF, qui nuisaient à la collaboration nécessaire pour construire des écoles (Russell J. 2016; Gomery J. 2025).',
     ],
 
-    nowTitle: 'Ce que le CSF poursuit maintenant — et pourquoi c’est une impasse coûteuse',
+    nowTitle: 'Pourquoi nous questionnons le rapport coûts-bénéfices de poursuivre le litige',
     nowBody:
-      'La vague B (depuis ~2020) vise l’exécution : sites, outils fonciers, coopération avec la Province et le Vancouver School Board. Le procès d’exécution (~117 jours) a donné des résultats mitigés; le CSF a porté appel. Les grands principes de l’article 23 ont déjà été clarifiés en 2020. Continuer une escalade maximaliste en cour — financée par le fonds d’exploitation — rapporte de moins en moins pour les élèves déjà inscrits, alors que les écoles actuelles perdent du monde et qu’un déficit de 3,4 M$ doit être remboursé d’ici 2028.',
+      'La vague B (depuis ~2020) vise l’exécution : sites, outils fonciers, coopération avec la Province et le Vancouver School Board. Le procès d’exécution (~117 jours) a donné des résultats mitigés; le CSF a porté appel. Les grands principes de l’article 23 ont déjà été clarifiés en 2020. Chercher des remèdes plus larges en appel — financé par le fonds d’exploitation — rapporte de moins en moins pour les élèves déjà inscrits, alors que les écoles actuelles perdent du monde et qu’un déficit de 3,4 M$ doit être remboursé d’ici 2028.',
     feesTitle: 'Paiements SOFI à Juristes Power Law (année par année)',
     feesIntro:
       'Montants exacts tirés des SOFI publics du CSF. Le site du CSF publie des SOFI à partir de 2019–20 seulement. Les états financiers vérifiés de 2010 à 2019 sont en ligne, mais ils ne ventilent pas les paiements au cabinet. CBC rapportait déjà près de 17 M$ dépensés sur le dossier au verdict de 2016.',
@@ -87,51 +87,51 @@ export const legal = {
         sourceLabel: 'SOFI CSF',
       },
       {
-        label: 'Estimation — honoraires CSF (durée)',
+        label: 'ESTIMATION — honoraires CSF (durée)',
         value: '> 35 M$',
         href: sources.cbc2016.href,
         sourceLabel: 'CBC + SOFI (estim.)',
       },
       {
-        label: 'Estimation — toutes parties (CSF + défense Province/VSB)',
+        label: 'ESTIMATION — toutes parties (CSF + défense Province/VSB)',
         value: '> 40–45 M$',
         href: sources.radioCanadaWaveBCosts.href,
         sourceLabel: 'Radio-Canada (estim.)',
       },
     ],
-    estimateNote: `Ce sont des estimations, pas des totaux consolidés vérifiés. ${estimateNotes.fr.lifetime} ${estimateNotes.fr.allParties}`,
+    estimateNote: `Ce sont des estimations, pas des totaux consolidés vérifiés. Ne pas additionner ces lignes : certains repères se chevauchent. ${estimateNotes.fr.lifetime} ${estimateNotes.fr.allParties}`,
     opportunityTitle: 'Coût d’opportunité',
     opportunityBody:
-      'En 2024–25, les paiements à Juristes Power (~8,9 M$) représentaient près de 28 % de la masse salariale enseignante (SOFI vs salaires enseignants, AFS 2024–25, annexe 2B) — environ 1 $ en honoraires pour 4 $ versés aux enseignants.',
-    deficitTitle: 'Le carcan du déficit',
+      'En 2024–25, les paiements à Juristes Power (~8,9 M$) représentaient près de 28 % de la masse salariale enseignante (SOFI vs salaires enseignants, AFS 2024–25, annexe 2B) — environ 1 $ en honoraires pour 4 $ versés aux enseignants. C’est une comparaison d’échelle, pas une affirmation que les salaires des enseignants ont été réduits de ce montant.',
+    deficitTitle: 'Contrainte de remboursement du déficit',
     deficitBody:
       'Les conseils ne peuvent normalement pas porter un déficit d’exploitation accumulé. Le ministère a approuvé ~3,4 M$ le 13 mars 2026, à éliminer au plus tard le 30 juin 2028. Des frais juridiques ouverts entrent en collision avec cette obligation.',
     closeTitle: 'Notre ligne',
     closeBody:
-      'Les droits, oui. L’expansion du français, oui. Financer la suite avec le fonds d’exploitation des élèves, non. Si le conseil veut continuer, qu’il trouve un financement extérieur.',
+      'Les droits, oui. L’expansion du français, oui. Financer la suite avec le fonds d’exploitation des élèves, non. Prioriser la médiation; si le conseil veut continuer en cour, qu’il trouve un financement extérieur.',
     sourcesIntro:
       'Chaque chiffre important renvoie à un document public, un jugement ou un reportage. Les totaux « durée de vie » et « toutes parties » sont des estimations construites à partir de ces sources — pas une seule facture.',
   },
   en: {
     title: 'Legal case — CSF Students First',
     description:
-      'Since 2010: language rights, major wins, then a costly enforcement wave — CSF counsel spend well over $35M.',
+      'Since 2010: language rights, major wins, then a costly enforcement wave — tens of millions in documented legal spending.',
     h1: 'State of the case and legal fees',
-    lead: 'Language rights matter. Here is what CSF fought for and won in court — and why the ongoing litigation path may be costing big dollars for diminishing returns.',
+    lead: 'Language rights matter. Here is what CSF fought for and won in court — and why continuing the litigation path raises cost-benefit questions for today’s students.',
 
     fightTitle: 'What CSF has been fighting for',
     fightBody:
-      'Since June 2010, CSF (with the Fédération des parents francophones and rights-holder parents) has litigated against the Province under Charter section 23: underfunding and inadequate French-language facilities in B.C. Wave A sought systemic funding reforms, facilities in about 17 communities, damages — and a court-ordered capital program on the order of ~$300M+.',
+      'Since June 2010, CSF (with the Fédération des parents francophones and rights-holder parents) has litigated against the Province under Charter section 23: underfunding and inadequate French-language facilities in B.C. Wave A sought systemic funding reforms, facilities in about 17 communities, damages — and facilities remedies estimated in the hundreds of millions (not a literal court cheque for that amount).',
     winsTitle: 'Major results and highlights',
     wins: [
       '2016 (BCSC 1764): partial success after a 238-day trial — not the mega capital-build order sought.',
-      '2020 (SCC 13): major win — broader facilities declarations, $6M transport damages restored, $1.1M AFG Rural Factor. It was not a $300M court-ordered build program.',
+      '2020 (SCC 13): major win — broader facilities declarations, $6M transport damages restored, $1.1M AFG Rural Factor. It was not a court-ordered build program for hundreds of millions.',
       'Courts also criticized CSF’s adversarial “positioning letters,” which impeded the collaboration needed to actually deliver schools (Russell J. 2016; Gomery J. 2025).',
     ],
 
-    nowTitle: 'What CSF is fighting for now — and why it is a costly dead end',
+    nowTitle: 'Why we question the cost-benefit of continuing litigation',
     nowBody:
-      'Wave B (from ~2020) is enforcement: sites, land tools, and cooperation with the Province and Vancouver School Board. The enforcement trial (~117 days) produced mixed results; CSF appealed. The big section 23 principles were largely clarified in 2020. Continuing maximalist courtroom escalation — paid from the operating fund — delivers diminishing returns for students already enrolled, while existing schools lose enrolment and a $3.4M deficit must be cleared by 2028.',
+      'Wave B (from ~2020) is enforcement: sites, land tools, and cooperation with the Province and Vancouver School Board. The enforcement trial (~117 days) produced mixed results; CSF appealed. The big section 23 principles were largely clarified in 2020. Seeking broader remedies on appeal — paid from the operating fund — delivers diminishing returns for students already enrolled, while existing schools lose enrolment and a $3.4M deficit must be cleared by 2028.',
     feesTitle: 'SOFI payments to Juristes Power Law (year by year)',
     feesIntro:
       'Exact amounts from CSF’s public SOFIs. CSF’s financial-reports page only publishes SOFIs from 2019–20 onward. Audited financial statements for 2010–2019 are online, but they do not break out payments to the law firm. CBC reported nearly $17M already spent on the case by the 2016 trial verdict.',
@@ -158,28 +158,28 @@ export const legal = {
         sourceLabel: 'CSF SOFI',
       },
       {
-        label: 'Estimate — lifetime CSF counsel',
+        label: 'ESTIMATE — lifetime CSF counsel',
         value: '>$35M',
         href: sources.cbc2016.href,
         sourceLabel: 'CBC + SOFI (est.)',
       },
       {
-        label: 'Estimate — all parties (CSF + Province/VSB defence)',
+        label: 'ESTIMATE — all parties (CSF + Province/VSB defence)',
         value: '>$40–45M',
         href: sources.radioCanadaWaveBCosts.href,
         sourceLabel: 'Radio-Canada (est.)',
       },
     ],
-    estimateNote: `These are estimates, not audited consolidated totals. ${estimateNotes.en.lifetime} ${estimateNotes.en.allParties}`,
+    estimateNote: `These are estimates, not audited consolidated totals. Do not add these rows together: some benchmarks overlap. ${estimateNotes.en.lifetime} ${estimateNotes.en.allParties}`,
     opportunityTitle: 'Opportunity cost',
     opportunityBody:
-      'In 2024–25, Juristes Power payments (~$8.9M) were nearly 28% of teacher salaries (SOFI vs teacher salaries, AFS 2024–25 Schedule 2B) — roughly $1 in legal fees for every $4 paid to teachers.',
-    deficitTitle: 'The deficit leash',
+      'In 2024–25, Juristes Power payments (~$8.9M) were nearly 28% of teacher salaries (SOFI vs teacher salaries, AFS 2024–25 Schedule 2B) — roughly $1 in legal fees for every $4 paid to teachers. This is a scale comparison, not a claim that teacher salaries were cut by that amount.',
+    deficitTitle: 'Deficit-recovery constraint',
     deficitBody:
       'Boards are not normally allowed to carry an accumulated operating deficit. The Ministry approved ~$3.4M on 13 March 2026, to be eliminated by 30 June 2028. Open-ended legal fees collide with that duty.',
     closeTitle: 'Our line',
     closeBody:
-      'Rights, yes. Expanding French access, yes. Funding the next round from student operating funds, no. If the board wants to continue, it must find outside funding.',
+      'Rights, yes. Expanding French access, yes. Funding the next round from student operating funds, no. Prioritize mediation; if the board wants to continue in court, it must find outside funding.',
     sourcesIntro:
       'Every major figure links to a public document, judgment, or news report. The “lifetime” and “all parties” totals are estimates built from those sources — not a single invoice.',
   },
@@ -187,9 +187,9 @@ export const legal = {
 
 export const pushback = {
   fr: {
-    title: 'Réactions — Élèves d’abord',
+    title: 'Réponses de la communauté — Élèves d’abord',
     description: 'Lettres du SEPF, réponse du ministère, médias et réseaux sociaux.',
-    h1: 'Réactions',
+    h1: 'Réponses de la communauté',
     lead:
       'Syndicats, partenaires, médias et parents ont signalé que le coût du litige pèse sur les services. Voici les documents, reportages et canaux sociaux à consulter.',
     listTitle: 'Lire et suivre',
@@ -265,9 +265,9 @@ export const pushback = {
       'Les élections scolaires de l’automne 2026 sont une fenêtre de responsabilité. Ce site documente les faits pour les parents et la presse.',
   },
   en: {
-    title: 'Pushback — CSF Students First',
+    title: 'Community response — CSF Students First',
     description: 'SEPF letters, Ministry reply, news, and social channels.',
-    h1: 'Pushback',
+    h1: 'Community response',
     lead:
       'Unions, partners, media, and parents have flagged that litigation cost is hitting services. Here are the documents, reports, and social channels to follow.',
     listTitle: 'Read and follow',
