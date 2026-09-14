@@ -7,10 +7,17 @@ interface Props {
   ids: readonly SourceId[];
   heading?: string;
   intro?: string;
+  extraLinks?: { label: string; href: string }[];
 }
 
-const { lang, ids, heading, intro } = Astro.props;
+const { lang, ids, heading, intro, extraLinks = [] } = Astro.props;
 const list = pickSources([...ids]);
+const seen = new Set(list.map((s) => s.href));
+const extras = extraLinks.filter((link) => {
+  if (seen.has(link.href)) return false;
+  seen.add(link.href);
+  return true;
+});
 const title =
   heading ?? (lang === 'fr' ? 'Sources et références' : 'Sources and references');
 const typeLabel: Record<string, { fr: string; en: string }> = {
@@ -37,6 +44,16 @@ const typeLabel: Record<string, { fr: string; en: string }> = {
             <span class="sr-only"> {lang === 'fr' ? '(nouvel onglet)' : '(opens in new tab)'}</span>
           </a>
           {s.note && <span class="note"> — {s.note[lang]}</span>}
+        </li>
+      ))
+    }
+    {
+      extras.map((link) => (
+        <li>
+          <a href={link.href} target="_blank" rel="noopener noreferrer">
+            {link.label}
+            <span class="sr-only"> {lang === 'fr' ? '(nouvel onglet)' : '(opens in new tab)'}</span>
+          </a>
         </li>
       ))
     }

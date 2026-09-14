@@ -46,10 +46,6 @@ const pageRefs = (() => {
             <h2 id="one-minute-heading" class="one-minute-title">{caseDeep.oneMinuteTitle}</h2>
             <p class="one-minute-body">{caseDeep.oneMinuteBody}</p>
           </aside>
-          <aside class="what-csf-says" aria-labelledby="what-csf-says-heading">
-            <h2 id="what-csf-says-heading" class="one-minute-title">{caseDeep.whatCsfSaysTitle}</h2>
-            <p class="one-minute-body">{caseDeep.whatCsfSaysBody}</p>
-          </aside>
         </div>
       </div>
     </header>
@@ -105,15 +101,6 @@ const pageRefs = (() => {
           }
         </div>
         <p class="estimate-note reading">{t.estimateNote}</p>
-      </div>
-    </section>
-
-    <section class="legal-band section" aria-labelledby="fight-heading">
-      <div class="container-page">
-        <div class="reading">
-          <h2 id="fight-heading" class="font-display">{t.fightTitle}</h2>
-          <p>{t.fightBody}</p>
-        </div>
       </div>
     </section>
 
@@ -263,27 +250,12 @@ const pageRefs = (() => {
             ))}
           </div>
         </section>
-
-        <aside class="wave-refs page-refs" aria-labelledby="case-refs-heading">
-          <p id="case-refs-heading" class="refs-label">{lang === 'fr' ? 'Références' : 'References'}</p>
-          <ul>
-            {
-              pageRefs.map((ref) => (
-                <li>
-                  <a href={ref.href} target="_blank" rel="noopener noreferrer">
-                    {ref.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </aside>
       </div>
     </section>
 
     <section class="legal-band section panel close-band">
       <div class="container-page">
-        <SourcesList lang={lang} ids={pageSourceIds.legal} intro={t.sourcesIntro} />
+        <SourcesList lang={lang} ids={pageSourceIds.legal} intro={t.sourcesIntro} extraLinks={pageRefs} />
       </div>
     </section>
   </article>

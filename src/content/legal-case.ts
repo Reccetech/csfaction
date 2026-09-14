@@ -51,10 +51,7 @@ export const legalCaseDeep = {
   fr: {
     oneMinuteTitle: 'En une minute',
     oneMinuteBody:
-      'Les droits linguistiques du CSF sont réels. Depuis 2010, le conseil poursuit la Province sous l’article 23 de la Charte pour sous-financement et installations inadéquates. La vague A a fait reconnaître des manquements et a produit des déclarations et dommages importants (CSC 2020) — mais pas les remèdes en installations estimés à des centaines de millions qu’il demandait. La vague B (exécution) a donné des résultats mitigés en mai 2025. Le CSF, la Province et le VSB ont formé des appels; les dates d’audience ne sont pas encore confirmées publiquement.',
-    whatCsfSaysTitle: 'Ce que dit le CSF',
-    whatCsfSaysBody:
-      'Le CSF a raison de souligner que les droits sous l’article 23 sont réels et que les tribunaux ont déjà reconnu des manquements importants. Notre désaccord porte sur la stratégie : financer la poursuite d’appels et de remèdes plus larges à même le fonds d’exploitation des élèves.',
+      'Depuis 2010, le conseil poursuit la Province sous l’article 23 de la Charte pour sous-financement et installations inadéquates. La vague A a fait reconnaître des manquements et a produit des déclarations et dommages importants (CSC 2020) — mais pas les remèdes en installations estimés à des centaines de millions qu’il demandait. La vague B (exécution) a donné des résultats mitigés en mai 2025. Le CSF, la Province et le VSB ont formé des appels qui sont en cours.',
     glossaryTitle: 'Petit glossaire',
     glossary: [
       {
@@ -271,10 +268,7 @@ export const legalCaseDeep = {
   en: {
     oneMinuteTitle: 'In one minute',
     oneMinuteBody:
-      'CSF’s language rights are real. Since 2010, the board has sued the Province under Charter section 23 over underfunding and inadequate French-language facilities. Wave A secured recognition of breaches plus important declarations and damages (SCC 2020) — but not the facilities remedies estimated in the hundreds of millions that CSF sought. Wave B (enforcement) produced mixed results in May 2025. CSF, the Province, and VSB have filed appeals; hearing dates are not yet confirmed in public reporting.',
-    whatCsfSaysTitle: 'What CSF says',
-    whatCsfSaysBody:
-      'CSF is right that section 23 rights are real and that courts have already recognized important breaches. Our disagreement is about strategy: funding continued appeals and broader remedies from the student operating fund.',
+      'Since 2010, the board has sued the Province under Charter section 23 over underfunding and inadequate French-language facilities. Wave A secured recognition of breaches plus important declarations and damages (SCC 2020) — but not the facilities remedies estimated in the hundreds of millions that CSF sought. Wave B (enforcement) produced mixed results in May 2025. CSF, the Province, and VSB have filed appeals which are ongoing',
     glossaryTitle: 'Quick glossary',
     glossary: [
       {
